@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<link rel="manifest" href="manifest.json"><meta name="theme-color" content="#16a34a"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
+<link rel="manifest" href="manifest.json"><meta name="theme-color" id="tc" content="#eef5f0"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
 <title>Passo a Passo – Meta de caminhada</title>
 <style>
 :root{--bg:#f4f7f4;--cd:#fff;--tx:#14221a;--mu:#5f6f66;--pr:#16a34a;--or:#f97316;--bd:#e0e8e2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1611;--cd:#17221b;--tx:#e8f0ea;--mu:#9aab9f;--pr:#4ade80;--or:#fb923c;--bd:#26342b}}
 :root[data-theme="dark"]{--bg:#0e1611;--cd:#17221b;--tx:#e8f0ea;--mu:#9aab9f;--pr:#4ade80;--or:#fb923c;--bd:#26342b}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);background:var(--bg)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding-bottom:90px}
 main{max-width:520px;margin:0 auto;padding:12px}
@@ -52,9 +52,7 @@ nav button{flex:1;background:none;color:var(--mu);border-radius:0;font-size:12px
 :root[data-theme="rose"]{--bg:#fff0f4;--g1:#fecdd3;--g2:#e9d5ff;--cd:rgba(255,255,255,.55);--bd:rgba(255,255,255,.95);--in:rgba(255,255,255,.6);--tr:rgba(80,20,40,.14);--tx:#3b1020;--mu:#7d5565;--pr:#e11d48;--or:#9333ea;--on:#fff;color-scheme:light}
 :root[data-theme="lava"]{--bg:#140805;--g1:#7f1d1d;--g2:#78350f;--cd:rgba(255,255,255,.06);--bd:rgba(255,200,160,.32);--in:rgba(255,255,255,.07);--tr:rgba(255,200,160,.17);--tx:#fdeee4;--mu:#c2a597;--pr:#fb923c;--or:#f43f5e;--on:#2a0e03;color-scheme:dark}
 :root[data-theme="mono"]{--bg:#0d0d0f;--g1:#2a2a30;--g2:#18181b;--cd:rgba(255,255,255,.06);--bd:rgba(255,255,255,.28);--in:rgba(255,255,255,.07);--tr:rgba(255,255,255,.15);--tx:#f4f4f5;--mu:#a1a1aa;--pr:#e4e4e7;--or:#facc15;--on:#18181b;color-scheme:dark}
-body::before{content:"";position:fixed;inset:-30%;z-index:-1;background:radial-gradient(48% 40% at 22% 18%,var(--g1),transparent 70%),radial-gradient(46% 40% at 80% 82%,var(--g2),transparent 70%),radial-gradient(34% 30% at 72% 28%,color-mix(in srgb,var(--pr) 13%,transparent),transparent 70%),radial-gradient(30% 28% at 28% 76%,color-mix(in srgb,var(--or) 9%,transparent),transparent 70%),var(--bg);animation:bgf 34s ease-in-out infinite alternate;will-change:transform}
-@keyframes bgf{0%{transform:translate3d(0,0,0) rotate(0deg) scale(1)}33%{transform:translate3d(3%,-2.5%,0) rotate(4deg) scale(1.06)}66%{transform:translate3d(-3.5%,2%,0) rotate(-3deg) scale(1.1)}100%{transform:translate3d(2%,3.5%,0) rotate(5deg) scale(1.04)}}
-@media(prefers-reduced-motion:reduce){body::before{animation:none}}
+body::before{content:"";position:fixed;inset:-30%;z-index:-1;background:radial-gradient(48% 40% at 22% 18%,var(--g1),transparent 70%),radial-gradient(46% 40% at 80% 82%,var(--g2),transparent 70%),radial-gradient(34% 30% at 72% 28%,color-mix(in srgb,var(--pr) 13%,transparent),transparent 70%),radial-gradient(30% 28% at 28% 76%,color-mix(in srgb,var(--or) 9%,transparent),transparent 70%),var(--bg)}
 .cd,nav,.chip{-webkit-backdrop-filter:blur(16px) saturate(150%);backdrop-filter:blur(16px) saturate(150%)}
 .cd{position:relative;border:1px solid rgba(255,255,255,.14);background:var(--cd);box-shadow:0 8px 30px rgba(0,0,0,.1)}
 .cd::after{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:linear-gradient(135deg,var(--bd),transparent 38%,transparent 62%,var(--bd));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
@@ -208,7 +206,7 @@ nav{z-index:5;transform:translateZ(0);will-change:transform;backface-visibility:
 <script>
 const KEY='passoapasso:v1',$=id=>document.getElementById(id),pad=n=>String(n).padStart(2,'0'),
 k=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()),today=()=>k(new Date()),
-def=()=>({v:1,cfg:{goal:30,mg:20,sw:'',tw:'',h:'',n:false,gps:true,name:'',snd:'beep',vib:'double',wg:2,wr:false,wi:90,ws:'08:00',we:'21:00',r:['07:00','18:00']},days:{},weights:{},water:{},wlast:0,timer:null,fl:''}),
+def=()=>({v:1,cfg:{goal:30,mg:20,sw:'',tw:'',h:'',n:false,gps:true,name:'',snd:'beep',vib:'double',wg:2,wr:false,wi:90,ws:'08:00',we:'21:00',r:['07:00','18:00'],sg:6000,sl:'',sc:true,sr:true,srt:'21:00'},days:{},weights:{},water:{},wlast:0,timer:null,fl:'',sdl:''}),
 LV=['Iniciante','Caminhante','Persistente','Imparável','Atleta','Lenda'];
 const IC={stop:'<svg class="ic" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2.5"/></svg>',play:'<svg class="ic" viewBox="0 0 24 24"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></svg>',dn:'<svg class="ic l" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>'};
 const PI={sw:'<circle cx="12" cy="13.5" r="7.5"/><path d="M12 9.5v4l2.5 1.5M9.5 3h5M12 3v3"/>',pin:'<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/>',bolt:'<path d="M13 3 5 13.5h6L10 21l8-10.5h-6z"/>',flame:'<path d="M12 3c1 3.5 5 5.5 5 10a5 5 0 0 1-10 0c0-2 1-3.2 2-4.2.2 1.2.8 2 1.6 2.4C10.2 8.5 10.5 5.5 12 3z"/>',ban:'<circle cx="12" cy="12" r="8.5"/><path d="m6 6 12 12"/>',lock:'<rect x="5.5" y="11" width="13" height="9" rx="2"/><path d="M8.5 11V8a3.5 3.5 0 0 1 7 0v3"/>',sat:'<circle cx="12" cy="12" r="1.6"/><path d="M7.8 7.8a6 6 0 0 0 0 8.4M16.2 7.8a6 6 0 0 1 0 8.4M4.9 4.9a10 10 0 0 0 0 14.2M19.1 4.9a10 10 0 0 1 0 14.2"/>',warn:'<path d="M12 4 3 19.5h18z"/><path d="M12 10v4.5M12 17.2v.1"/>',ok:'<circle cx="12" cy="12" r="8.5"/><path d="m8.5 12.3 2.5 2.5 4.5-5"/>'};
@@ -219,15 +217,18 @@ S=Object.assign(def(),S||{});S.cfg=Object.assign(def().cfg,S.cfg);
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}},
 hit=r=>!!r&&r.min>=(r.g||S.cfg.goal);
 
-function calc(){let st=0,best=0,pts=0,tot=0,km=0,kc=0;const w0=kw();const ds=Object.keys(S.days).sort();
+function calc(){let st=0,best=0,pts=0,tot=0,km=0,kc=0,sp=0;const w0=kw();const ds=Object.keys(S.days).sort();
  if(ds.length)for(const d=new Date(ds[0]+'T12:00:00'),e=today();k(d)<=e;d.setDate(d.getDate()+1)){const key=k(d),r=S.days[key];
-  if(r){tot+=r.min;km+=r.km||0;pts+=r.min;kc+=kd(r,w0)}
+  if(r){tot+=r.min;km+=r.km||0;pts+=r.min;kc+=kd(r,w0);sp+=r.st||0}
   if(hit(r)){st++;best=Math.max(best,st);pts+=20+Math.min(st,10)*2}else if(key!==e)st=0}
- return{st,best,pts,tot,km,kc,lvl:Math.floor(pts/300)+1}}
+ return{st,best,pts,tot,km,kc,sp,lvl:Math.floor(pts/300)+1}}
 function ws(){const a=Object.entries(S.weights).sort(),cur=a.length?a[a.length-1][1]:0,sw=+S.cfg.sw||(a.length?a[0][1]:0);return{a,cur,sw,lost:cur&&sw?Math.max(0,+(sw-cur).toFixed(1)):0}}
 const kw=()=>ws().cur||70,kcal=(m,v,w)=>m*(v>0?Math.min(Math.max(1.2+.55*v,2.3),9):3.3)*(w||kw())/60,kd=(r,w)=>r?(r.kc??Math.round(kcal(r.min,spd(r),w))):0;
 const mh=p=>Object.keys(S.days).filter(d=>d.startsWith(p)&&hit(S.days[d])).length,
-BD=[['👟','Primeiro passo',c=>c.tot>0],['🔥','3 dias seguidos',c=>c.best>=3],['🔥','Semana de fogo (7)',c=>c.best>=7],['🏅','14 dias seguidos',c=>c.best>=14],['👑','30 dias seguidos',c=>c.best>=30],['⏱️','5 horas andadas',c=>c.tot>=300],['🏃','20 horas andadas',c=>c.tot>=1200],['⭐','1000 pontos',c=>c.pts>=1000],['⚖️','−1 kg',(c,w)=>w.lost>=1],['🏆','−5 kg',(c,w)=>w.lost>=5],['📅','Desafio do mês',()=>mh(today().slice(0,7))>=S.cfg.mg],['💎','Nível 5',c=>c.lvl>=5],['📍','10 km percorridos',c=>c.km>=10],['🗺️','50 km percorridos',c=>c.km>=50],['🚩','100 km percorridos',c=>c.km>=100],['🔥','500 kcal queimadas',c=>c.kc>=500],['🌋','5.000 kcal queimadas',c=>c.kc>=5000],['⏳','60 min em um dia',()=>Object.values(S.days).some(r=>r.min>=60)],['⚡','Ritmo forte: 6 km/h',()=>Object.values(S.days).some(r=>spd(r)>=6)],['💧','Dia hidratado',()=>Object.keys(S.water).some(d=>S.water[d]>=(+S.cfg.wg||2)*1000)],['📆','20 dias registrados',()=>Object.keys(S.days).length>=20],['🧭','Maratonista: 42 km',c=>c.km>=42.2],['🌟','2.500 pontos',c=>c.pts>=2500],['🛡️','60 dias seguidos',c=>c.best>=60]];
+BD=[['👟','Primeiro passo',c=>c.tot>0],['🔥','3 dias seguidos',c=>c.best>=3],['🔥','Semana de fogo (7)',c=>c.best>=7],['🏅','14 dias seguidos',c=>c.best>=14],['👑','30 dias seguidos',c=>c.best>=30],['⏱️','5 horas andadas',c=>c.tot>=300],['🏃','20 horas andadas',c=>c.tot>=1200],['⭐','1000 pontos',c=>c.pts>=1000],['⚖️','−1 kg',(c,w)=>w.lost>=1],['🏆','−5 kg',(c,w)=>w.lost>=5],['📅','Desafio do mês',()=>mh(today().slice(0,7))>=S.cfg.mg],['💎','Nível 5',c=>c.lvl>=5],['📍','10 km percorridos',c=>c.km>=10],['🗺️','50 km percorridos',c=>c.km>=50],['🚩','100 km percorridos',c=>c.km>=100],['🔥','500 kcal queimadas',c=>c.kc>=500],['🌋','5.000 kcal queimadas',c=>c.kc>=5000],['⏳','60 min em um dia',()=>Object.values(S.days).some(r=>r.min>=60)],['⚡','Ritmo forte: 6 km/h',()=>Object.values(S.days).some(r=>spd(r)>=6)],['💧','Dia hidratado',()=>Object.keys(S.water).some(d=>S.water[d]>=(+S.cfg.wg||2)*1000)],['📆','20 dias registrados',()=>Object.keys(S.days).length>=20],['🧭','Maratonista: 42 km',c=>c.km>=42.2],['🌟','2.500 pontos',c=>c.pts>=2500],['🛡️','60 dias seguidos',c=>c.best>=60],['👣','Primeiros 1.000 passos',c=>c.sp>=1000],['🚶','5.000 passos em um dia',()=>mxs()>=5000],['🔟','10.000 passos em um dia',()=>mxs()>=10000],['🚀','20.000 passos em um dia',()=>mxs()>=20000],['🦶','Meta de passos batida',()=>mxs()>=(+S.cfg.sg||6000)],['🗓️','7 dias seguidos com meta de passos',()=>sst()>=7],['🥾','50.000 passos no total',c=>c.sp>=50000],['🛤️','100.000 passos no total',c=>c.sp>=100000],['🌄','500.000 passos no total',c=>c.sp>=500000],['🌍','1 milhão de passos',c=>c.sp>=1000000]];
+function mxs(){return Math.max(0,...Object.values(S.days).map(r=>r.st||0))}
+function sst(){const g=+S.cfg.sg||6000,ds=Object.keys(S.days).filter(d=>(S.days[d].st||0)>=g).sort();let b=0,c=0,p=null;for(const d of ds){const t=new Date(d+'T12:00:00').getTime();c=p&&Math.round((t-p)/864e5)===1?c+1:1;b=Math.max(b,c);p=t}return b}
+const fm=n=>(Math.round(+n)||0).toLocaleString('pt-BR'),str=()=>((+S.cfg.sl)||(+S.cfg.h?+S.cfg.h*.415:72))/100,lst=T=>{const e=Math.round((T&&T.d||0)/str());return T&&T.p>=10?T.p:Math.max(T&&T.p||0,e)},stT=()=>((S.days[sel]||{}).st||0)+(sel===today()&&S.timer&&S.timer.s?lst(S.timer):0);
 
 function toast(m,w){const t=$('ts');t.textContent=m;t.classList.toggle('win',!!w);t.classList.add('on');clearTimeout(tt);const A=M.animate&&!RM();
  if(A)M.animate(t,{opacity:[0,1],transform:['translateY(30px) scale(.9)','translateY(0px) scale(1)']},{duration:.7,ease:[.34,1.4,.64,1]});
@@ -237,22 +238,22 @@ function notify(t,b,w,k){toast(t+' '+b,w);ding(w,k);
  if(S.cfg.n||S.cfg.snd==='sys')try{navigator.serviceWorker.getRegistration().then(r=>r?r.showNotification(t,{body:b,icon:'icon-192.png',vibrate:[150,80,150],silent:false}):new Notification(t,{body:b})).catch(()=>{})}catch(e){try{new Notification(t,{body:b})}catch(e){}}}
 function ask(id,fn,el){if(armed===id){armed=null;fn()}else{armed=id;const t=el.textContent;el.textContent='Toque de novo para confirmar';setTimeout(()=>{if(armed===id){armed=null;el.textContent=t}},3500)}}
 
-function add(m,km){const r=S.days[sel]||(S.days[sel]={min:0,km:0,g:S.cfg.goal}),was=hit(r);r.kc=kd(r)+Math.round(kcal(m,km>0&&m>0?km/(m/60):0));r.min+=m;r.km=+((r.km||0)+(km||0)).toFixed(2);if(km>0)r.kmin=(r.kmin||0)+m;save();render();
- if(!was&&hit(r)){notify('🎉 Meta batida!','Ofensiva: '+calc().st+' dia(s) 🔥',true);party()}else toast('Registrado ✔️')}
-const ad=()=>{const m=Math.round(+$('cm').value),km=+$('ck').value;m>0||km>0?add(m>0?m:0,km):toast('Informe os minutos')},
+function add(m,km,st){const r=S.days[sel]||(S.days[sel]={min:0,km:0,g:S.cfg.goal}),was=hit(r),st0=r.st||0,sg0=+S.cfg.sg||6000;r.kc=kd(r)+Math.round(kcal(m,km>0&&m>0?km/(m/60):0));r.min+=m;r.km=+((r.km||0)+(km||0)).toFixed(2);if(km>0)r.kmin=(r.kmin||0)+m;const sp=st==null?(km>0?Math.round(km*1000/str()):0):st;if(sp>0)r.st=st0+sp;save();render();
+ if(!was&&hit(r)){notify('🎉 Meta batida!','Ofensiva: '+calc().st+' dia(s) 🔥',true);party()}else if(sp>0&&st0<sg0&&r.st>=sg0){notify('👣 Meta de passos batida!',fm(r.st)+' passos hoje.',true);party()}else toast('Registrado ✔️')}
+const ad=()=>{const m=Math.round(+$('cm').value),km=+$('ck').value,p=Math.round(+$('cp').value);m>0||km>0||p>0?add(m>0?m:0,km,p>0?p:null):toast('Informe minutos, km ou passos')},
 zr=()=>{delete S.days[sel];save();render()},rs=()=>{S=def();save();sel=today();render()},
 pw=()=>{const v=+$('wi').value;if(v>0){S.weights[sel]=v;save();render();toast('Peso salvo ⚖️')}},
 up=()=>{sc('goal',S.cfg.goal+5);render()};
 function flip(h0){const c=$('tcard');if(!c||!h0||!M.animate||RM())return;const h1=c.offsetHeight;if(Math.abs(h0-h1)<2)return;
  try{M.animate(c,{height:[h0+'px',h1+'px']},{duration:.8,ease:[.32,.72,0,1]});[...c.children].forEach((e,j)=>M.animate(e,{opacity:[0,1],transform:['translateY(8px)','translateY(0px)']},{delay:.12+j*.05,duration:.6,ease:EX}));setTimeout(()=>{c.style.height=''},880)}catch(x){c.style.height=''}}
 function tg(){if(tgb)return;const card=$('tcard'),A=!!card&&!!M.animate&&!RM(),wo=$('walk').classList.contains('on');
- if(S.timer&&S.timer.s){const m=Math.round((Date.now()-S.timer.s)/60000),km=+((S.timer.d||0)/1000).toFixed(2),
-  fin=()=>{const h0=card?card.offsetHeight:0;S.timer=null;gpsOff();lp=null;sel=today();m>0?add(m,km):(save(),render());flip(h0)};
+ if(S.timer&&S.timer.s){const m=Math.round((Date.now()-S.timer.s)/60000),km=+((S.timer.d||0)/1000).toFixed(2),sp=lst(S.timer),
+  fin=()=>{const h0=card?card.offsetHeight:0;S.timer=null;gpsOff();stepOff();lp=null;sel=today();m>0?add(m,km,sp):(save(),render());flip(h0)};
   if(wo)walkClose();
   if(wo||!A)return fin();
   tgb=1;[$('gs'),$('tk')].forEach(e=>e&&M.animate(e,{opacity:[1,0],transform:['translateY(0px)','translateY(10px)']},{duration:.3,ease:[.4,0,.2,1]}));
   setTimeout(()=>{tgb=0;fin()},260)}
- else{S.timer={s:Date.now(),d:0,h:[]};lp=null;G={st:'',n:0,t:0,acc:0,cs:0};save();gpsOn();
+ else{S.timer={s:Date.now(),d:0,h:[],p:0};lp=null;G={st:'',n:0,t:0,acc:0,cs:0};save();gpsOn();stepOn();
   if(!A){render();walkOpen();return}
   card.innerHTML=tmr(1);tick();const bm=card.querySelector('.bbm');if(bm){void bm.offsetWidth;bm.classList.add('on')}
   const xp=$('xp');
@@ -265,13 +266,13 @@ function ringTap(el,w){const r=el.querySelector('.rsh');if(r){r.classList.remove
 function bm(){const on=!!(S.timer&&S.timer.s);document.querySelectorAll('.rsh,.rso').forEach(e=>e.classList.toggle('on',on))}
 function tick(){walkTick();bm();const tc=$('tcard');if(tc)tc.classList.toggle('lt',!!(S.timer&&S.timer.s));const e=$('tm');if(!e)return;const T=S.timer,s=T&&T.s?Math.floor((Date.now()-T.s)/1000):0;e.textContent=pad(Math.floor(s/60))+':'+pad(s%60);
  const g=$('tk'),z=$('gs');
- if(g&&T){const km=(T.d||0)/1000,av=s>15&&km>0?km/(s/3600):0;g.innerHTML='<span class="big">'+IC.pin+km.toFixed(2)+' km</span><div class="sm">'+IC.bolt+av.toFixed(1)+' km/h média · '+IC.flame+Math.round(kcal(s/60,av))+' kcal'+(G.cs>0?' · '+G.cs.toFixed(1)+' km/h agora':'')+'</div>'}
- if(z)z.innerHTML=gst()}
-function sc(key,v){if((key==='goal'||key==='wg'||key==='wi')&&!(+v>0))return toast('Valor inválido');
- if(/^r\d$/.test(key))S.cfg.r[+key[1]]=v;else S.cfg[key]=(key==='name'||key==='ws'||key==='we')?v.trim().slice(0,24):(v===''?'':+v);
+ if(g&&T){const km=(T.d||0)/1000,av=s>15&&km>0?km/(s/3600):0;g.innerHTML=!S.cfg.gps?'<span class="big">👣 '+fm(lst(T))+' passos</span><div class="sm">'+IC.flame+Math.round(kcal(s/60,0))+' kcal</div>':'<span class="big">'+IC.pin+km.toFixed(2)+' km</span><div class="sm">👣 '+fm(lst(T))+' passos · '+IC.bolt+av.toFixed(1)+' km/h média · '+IC.flame+Math.round(kcal(s/60,av))+' kcal'+(G.cs>0?' · '+G.cs.toFixed(1)+' km/h agora':'')+'</div>'}
+ if(z)z.innerHTML=gst();const q=$('stn');if(q){const v=stT(),g2=+S.cfg.sg||6000;q.textContent=fm(v);$('stb').style.width=Math.min(v/g2*100,100)+'%';$('stp').textContent=Math.round(v/g2*100)+'%'}}
+function sc(key,v){if((key==='goal'||key==='wg'||key==='wi'||key==='sg')&&!(+v>0))return toast('Valor inválido');
+ if(/^r\d$/.test(key))S.cfg.r[+key[1]]=v;else S.cfg[key]=(key==='name'||key==='ws'||key==='we'||key==='srt')?v.trim().slice(0,24):(v===''?'':+v);
  const r=S.days[today()];if(key==='goal'&&r&&!hit(r))r.g=S.cfg.goal;save();toast('Salvo ✔️')}
 async function tn(){S.cfg.n=!S.cfg.n;try{if(S.cfg.n&&'Notification' in window&&Notification.permission==='default')await Notification.requestPermission()}catch(e){}save();render()}
-function chk(){chkW();if(!S.cfg.n)return;const n=new Date(),m=n.getHours()*60+n.getMinutes(),c=calc(),r=S.days[today()];if(hit(r))return;
+function chk(){chkW();chkS();if(!S.cfg.n)return;const n=new Date(),m=n.getHours()*60+n.getMinutes(),c=calc(),r=S.days[today()];if(hit(r))return;
  const left=Math.max(S.cfg.goal-(r?r.min:0),0);
  [...S.cfg.r.map(t=>[t,'Faltam '+left+' min para a meta de hoje. Bora! 💪']),['20:30',c.st?'Sua ofensiva de '+c.st+' dia(s) está em risco! 🔥':'Ainda dá tempo de bater a meta de hoje!']].forEach(([t,msg])=>{
   const [h,i]=String(t).split(':'),T=Number(h)*60+Number(i),key=today()+t;if(m>=T&&m<T+20&&S.fl!==key){S.fl=key;save();notify('Passo a Passo',msg)}})}
@@ -280,7 +281,7 @@ async function ex(){const t=JSON.stringify(S),f='passoapasso-'+today()+'.json';
  try{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t],{type:'application/json'}));a.download=f;document.body.appendChild(a);a.click();a.remove();return toast('Backup baixado ✅')}catch(e){}
  const b=$('bk');b.value=t;b.select();try{document.execCommand('copy');toast('Backup copiado! Cole em uma nota ou mensagem')}catch(e){toast('Copie o texto abaixo')}}
 function imp(t){try{const o=JSON.parse(t);if(!o||!o.days)throw 0;
- for(const d in o.days){const a=S.days[d],b=o.days[d];if(!a||b.min>a.min)S.days[d]=b}
+ for(const d in o.days){const a=S.days[d],b=o.days[d];if(!a||b.min>a.min){if(a&&(a.st||0)>(b.st||0))b.st=a.st;S.days[d]=b}else if((b.st||0)>(a.st||0))a.st=b.st}
  Object.assign(S.weights,o.weights||{});S.water=S.water||{};for(const d in (o.water||{}))S.water[d]=Math.max(S.water[d]||0,o.water[d]);S.cfg=Object.assign(S.cfg,o.cfg||{});save();render();toast('Backup importado ✅')}catch(e){toast('Backup inválido ⚠️')}}
 async function fi(el){try{imp(await el.files[0].text())}catch(e){toast('Não consegui ler o arquivo')}}
 
@@ -290,7 +291,7 @@ spd=r=>{if(!r||!(r.km>0))return 0;const t=r.kmin||r.min;return t>0?r.km/(t/60):0
 hav=(a,b,c,d)=>{const r=Math.PI/180,x=(c-a)*r,y=(d-b)*r,h=Math.sin(x/2)**2+Math.cos(a*r)*Math.cos(c*r)*Math.sin(y/2)**2;return 12742000*Math.asin(Math.sqrt(h))},
 wake=()=>{try{navigator.wakeLock&&navigator.wakeLock.request('screen').then(l=>wl=l).catch(()=>{})}catch(e){}},
 tgps=()=>{S.cfg.gps=!S.cfg.gps;if(!S.cfg.gps)gpsOff();else if(S.timer&&S.timer.s)gpsOn();save();render()},
-gst=()=>{if(G.st==='denied')return IC.ban+'Localização bloqueada. Toque no cadeado '+IC.lock+' do Chrome → Permissões → Localização → Permitir.';
+gst=()=>{if(!S.cfg.gps)return'';if(G.st==='denied')return IC.ban+'Localização bloqueada. Toque no cadeado '+IC.lock+' do Chrome → Permissões → Localização → Permitir.';
  if(!G.n)return IC.sat+'Procurando sinal de GPS… fique em local aberto (pode levar até 1 min).';
  const a=Math.round((Date.now()-G.t)/1000);if(a>20)return IC.warn+'Sem atualização de GPS há '+a+' s. Mantenha o app aberto e a tela ligada.';
  return(G.st==='weak'?IC.warn+'Sinal fraco':IC.ok+'GPS ativo')+' · precisão ±'+Math.round(G.acc)+' m'};
@@ -307,6 +308,19 @@ function gpsOn(){if(!S.cfg.gps||wid!==null)return;
  if(!navigator.geolocation){G.st='denied';return toast('Este navegador não tem GPS. Informe os km manualmente.')}
  wid=navigator.geolocation.watchPosition(onFix,e=>{if(e.code===1){G.st='denied';gpsOff()}tick()},{enableHighAccuracy:true,maximumAge:0,timeout:60000});wake()}
 function gpsOff(){if(wid!==null){try{navigator.geolocation.clearWatch(wid)}catch(e){}wid=null}try{wl&&wl.release();wl=null}catch(e){}}
+let SP={l:0,c:0,f:null,g:null,up:0,has:0,t:0,on:0};
+function stepOn(){if(!S.cfg.sc||SP.on)return;
+ const go=()=>{SP={l:0,c:0,f:null,g:null,up:0,has:0,t:0,on:1};addEventListener('devicemotion',onMot);wake()};
+ try{if(window.DeviceMotionEvent&&typeof DeviceMotionEvent.requestPermission==='function')DeviceMotionEvent.requestPermission().then(r=>{if(r==='granted')go()}).catch(()=>{});else if(window.DeviceMotionEvent)go()}catch(e){}}
+function stepOff(){if(SP.on){removeEventListener('devicemotion',onMot);SP.on=0}}
+function onMot(e){const a=e.accelerationIncludingGravity;if(!a||a.x==null)return;const T=S.timer;SP.has=1;SP.t=Date.now();if(!T||!T.s)return;
+ const m=Math.hypot(a.x,a.y,a.z),t=SP.t;SP.g=SP.g==null?m:SP.g*.98+m*.02;SP.f=SP.f==null?m:SP.f*.55+m*.45;const d=SP.f-SP.g;
+ if(SP.up){if(d<0)SP.up=0}else if(d>1.1&&t-SP.l>280){SP.up=1;if(t-SP.l>1600)SP.c=0;SP.l=t;SP.c++;if(SP.c===4)T.p=(T.p||0)+4;else if(SP.c>4)T.p=(T.p||0)+1;if(SP.c>=4&&T.p%10===0)save()}}
+function tsc(){S.cfg.sc=!S.cfg.sc;if(S.cfg.sc){if(S.timer&&S.timer.s)stepOn()}else stepOff();save();render()}
+function tsr(){S.cfg.sr=!S.cfg.sr;save();render();toast(S.cfg.sr?'Aviso do resumo ativado 📸':'Aviso do resumo desativado')}
+function tst(){const go=()=>{let n=0;const f=()=>{n++};addEventListener('devicemotion',f);toast('Testando sensor…');setTimeout(()=>{removeEventListener('devicemotion',f);toast(n>3?'✅ Sensor de movimento funcionando':'⚠️ Sem dados do sensor. Verifique as permissões do site (Sensores de movimento).')},1500)};
+ try{if(window.DeviceMotionEvent&&typeof DeviceMotionEvent.requestPermission==='function')DeviceMotionEvent.requestPermission().then(r=>r==='granted'?go():toast('Permissão negada')).catch(()=>toast('Não foi possível pedir permissão'));else if(window.DeviceMotionEvent)go();else toast('Este aparelho não tem sensor de movimento')}catch(e){toast('Sensor indisponível')}}
+function chkS(){if(!S.cfg.sr)return;const n=new Date(),p=String(S.cfg.srt||'21:00').split(':'),t=today(),r=S.days[t];if(S.sdl===t||!r||!(r.min||r.st))return;if(n.getHours()*60+n.getMinutes()<Number(p[0])*60+Number(p[1]))return;S.sdl=t;save();notify('📸 Resumo do dia pronto','Abra a aba Hoje e toque em “Ver resumo e compartilhar”.')}
 function tgt(){if(!navigator.geolocation)return toast('Este navegador não tem GPS.');toast('Buscando sinal de GPS…');
  navigator.geolocation.getCurrentPosition(p=>toast('✅ GPS funcionando (precisão ±'+Math.round(p.coords.accuracy)+' m)'),e=>toast(e.code===1?'🚫 Permissão negada. Toque no cadeado 🔒 do Chrome → Permissões → Localização → Permitir.':'⚠️ Sem sinal de GPS agora. Vá para um local aberto e tente de novo.'),{enableHighAccuracy:true,timeout:30000,maximumAge:0})}
 function wkc(L,fn,fmt,gl,H,cw,lb,cf){H=H||84;const vs=L.map(x=>fn(x[1])),mx=Math.max(gl||0,...vs,1);
@@ -326,10 +340,10 @@ function unpick(){const e=$('dc');e.classList.remove('on');e.dataset.k='';hl('')
 function pick(key){const e=$('dc');if(e.dataset.k===key&&e.classList.contains('on'))return unpick();
  const r=S.days[key],m=r?r.min:0,km=r&&r.km||0,sp=spd(r),g=r&&r.g||S.cfg.goal,d=new Date(key+'T12:00:00'),was=e.classList.contains('on');e.dataset.k=key;
  const st=!m?'Sem registro neste dia':m>g?'🔥 '+(m-g)+' min além da meta':m>=g?'✅ Meta batida':'🎯 Faltaram '+(g-m)+' min para a meta';
- e.innerHTML=`<div><div class="row" style="align-items:center;flex-wrap:nowrap"><h2 class="cap" style="margin:0;flex:1">${d.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'short'})}</h2><button class="g" style="flex:0 0 44px;padding:0" onclick="unpick()">✕</button></div><div class="row c" style="margin-top:8px"><div><div class="big">⏱️ <span data-cu="${m}" data-t="m" data-k="dc0">${m>=60?Math.floor(m/60)+'h'+pad(m%60):m+' min'}</span></div><div class="sm mu">tempo</div></div><div><div class="big">📍 <span data-cu="${km}" data-d="2" data-k="dc1">${km.toFixed(2)}</span></div><div class="sm mu">km</div></div><div><div class="big">⚡ <span data-cu="${sp}" data-d="1" data-k="dc2">${sp.toFixed(1)}</span></div><div class="sm mu">km/h média</div></div></div><div class="sm c" style="margin-top:6px">${st}</div><div class="sm mu c" style="margin-top:3px">🔥 ${kd(r)} kcal · 💧 ${(wml(key)/1000).toFixed(2)} L de ${+S.cfg.wg||2} L</div></div>`;
+ e.innerHTML=`<div><div class="row" style="align-items:center;flex-wrap:nowrap"><h2 class="cap" style="margin:0;flex:1">${d.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'short'})}</h2><button class="g" style="flex:0 0 44px;padding:0" onclick="unpick()">✕</button></div><div class="row c" style="margin-top:8px"><div><div class="big">⏱️ <span data-cu="${m}" data-t="m" data-k="dc0">${m>=60?Math.floor(m/60)+'h'+pad(m%60):m+' min'}</span></div><div class="sm mu">tempo</div></div><div><div class="big">📍 <span data-cu="${km}" data-d="2" data-k="dc1">${km.toFixed(2)}</span></div><div class="sm mu">km</div></div><div><div class="big">⚡ <span data-cu="${sp}" data-d="1" data-k="dc2">${sp.toFixed(1)}</span></div><div class="sm mu">km/h média</div></div></div><div class="sm c" style="margin-top:6px">${st}</div><div class="sm mu c" style="margin-top:3px">🔥 ${kd(r)} kcal · 👣 ${fm(r&&r.st||0)} passos · 💧 ${(wml(key)/1000).toFixed(2)} L de ${+S.cfg.wg||2} L</div></div>`;
  e.classList.add('on');e.classList.toggle('win',m>0&&m>=g);[...e.querySelectorAll('.row.c>div'),...e.querySelectorAll('div.sm.c')].forEach((c,j)=>{if(!c)return;const t0=.12+j*.24;try{if(M.animate&&!RM()){c.style.opacity=0;M.animate(c,{opacity:[0,1],transform:['translateY(18px)','translateY(0px)']},{delay:t0,duration:.85,ease:EX})}}catch(x){c.style.opacity=''}const x=c.querySelector('[data-cu]');if(x)cnt(x,t0+.15,0,1)});hl(key);clearTimeout(bt);bt=setTimeout(unpick,8000)}
 const TH=[['auto','Automático','#cfe8d8','#1b2b21'],['light','Claro','#bfe8cf','#cfe0ff'],['dark','Escuro','#123a27','#10263d'],['ocean','Oceano','#0b4a73','#0e6a7a'],['sunset','Pôr do sol','#ffcfb0','#ffbfd8'],['forest','Floresta','#14532d','#134e4a'],['grape','Uva','#4c1d95','#1e3a8a'],['neon','Neon','#5b21b6','#0e7490'],['rose','Rosa','#fecdd3','#e9d5ff'],['lava','Lava','#7f1d1d','#78350f'],['mono','Grafite','#2a2a30','#18181b']],
-ap=()=>{const t=S.cfg.theme||'auto',r=document.documentElement;if(t==='auto')r.removeAttribute('data-theme');else r.dataset.theme=t},
+ap=()=>{const t=S.cfg.theme||'auto',r=document.documentElement;if(t==='auto')r.removeAttribute('data-theme');else r.dataset.theme=t;try{const b=getComputedStyle(r).getPropertyValue('--bg').trim(),m=$('tc');if(m&&b)m.content=b}catch(e){}},
 sth=t=>{S.cfg.theme=t;save();render();toast('Tema aplicado 🎨')};
 const M=window.Motion||{},EX=[.16,1,.3,1],RM=()=>matchMedia('(prefers-reduced-motion:reduce)').matches,
 dl=i=>Math.min(70*(1.55**i-1),800)/1000,cdq=e=>e.target.closest&&e.target.closest('.cd');
@@ -393,20 +407,58 @@ function gm(m,g,c){const n=esc(S.cfg.name||''),h=new Date().getHours(),hi=h<12?'
  else{t=hi+cm+'.';x=P(['Que tal começar agora os seus '+g+' minutos de caminhada? O primeiro passo é o mais importante.','Hoje é dia de somar passos'+cm+'. '+g+' minutinhos já deixam o dia melhor.','Calce o tênis'+cm+' e comece sua meta de '+g+' minutos'+(c.st?'. Sua ofensiva de '+c.st+' dia(s) conta com você.':'.'),'Seu eu de amanhã agradece cada passo de hoje.','Não precisa ser perfeito, só precisa começar. São '+g+' minutos.','Os primeiros minutos são os mais difíceis. Depois o corpo pede mais.','Um tênis, uma rua e '+g+' minutos. É tudo de que você precisa.'])}
  return'<div class="gr"><div class="gt">'+t+'</div><p class="gx">'+x+'</p>'+(S.cfg.name?'':'<div class="row" style="margin-top:12px"><input id="nm" type="text" maxlength="24" placeholder="Como posso te chamar?"><button onclick="sn()">Salvar nome</button></div>')+'</div>'}
 let tgb=0;
-function tmr(f){const run=S.timer&&S.timer.s;return''+'<h2>'+IC.sw+'Cronômetro da caminhada</h2><div class="big c" id="tm">00:00</div>'+(run&&S.cfg.gps?'<div class="xp" id="xp"><div class="c" id="tk"></div><div class="sm mu c" id="gs"></div></div>':'')+'<button id="tbtn"'+(run?' class="pb"':'')+' style="width:100%" onclick="tg()">'+(run?IC.stop+'Finalizar e salvar':IC.play+'Iniciar caminhada')+'</button>'+(run?'<button class="g" style="width:100%;margin-top:8px" onclick="walkOpen()">Abrir tela da caminhada</button>':'')}
+function tmr(f){const run=S.timer&&S.timer.s;return''+'<h2>'+IC.sw+'Cronômetro da caminhada</h2><div class="big c" id="tm">00:00</div>'+(run&&(S.cfg.gps||S.cfg.sc)?'<div class="xp" id="xp"><div class="c" id="tk"></div><div class="sm mu c" id="gs"></div></div>':'')+'<button id="tbtn"'+(run?' class="pb"':'')+' style="width:100%" onclick="tg()">'+(run?IC.stop+'Finalizar e salvar':IC.play+'Iniciar caminhada')+'</button>'+(run?'<button class="g" style="width:100%;margin-top:8px" onclick="walkOpen()">Abrir tela da caminhada</button>':'')}
 const LEG='<div class="sm mu" style="margin-top:6px"><span class="lg b0"></span>abaixo da meta<span class="lg b1"></span>meta batida<span class="lg b2"></span>além da meta · linha tracejada = meta</div>';
 function allDays(w){const ks=Object.keys(S.days).concat(w?Object.keys(S.water):[]).sort(),L=[];if(ks.length)for(const d=new Date(ks[0]+'T12:00:00'),e=today();k(d)<=e;d.setDate(d.getDate()+1))L.push([new Date(d),S.days[k(d)]]);return L}
 function ovo(t){t=t||'min';const e=$('ov'),c=$('ovc'),L=allDays(t==='wt'),n=L.length,w0=kw(),g=+S.cfg.wg||2,sm=a=>a.reduce((x,y)=>x+y,0),f=x=>x[0].toLocaleDateString('pt-BR',{day:'numeric',month:'short'}),
  Z={min:[r=>r?r.min:0,v=>v,S.cfg.goal,LEG,'Todo o período',(v,L)=>L.filter(x=>hit(x[1])).length+' com meta batida'],
  km:[r=>r&&r.km||0,v=>v.toFixed(1),0,'','Distância · todo o período',v=>sm(v).toFixed(1)+' km no total'],
  kc:[r=>kd(r,w0),v=>v,0,'','Calorias · todo o período',v=>sm(v)+' kcal no total'],
+ st:[r=>r&&r.st||0,v=>v>=1000?(v/1000).toFixed(1)+'k':v,+S.cfg.sg||6000,LEG,'Passos · todo o período',v=>fm(sm(v))+' passos no total'],
  wt:[x=>x/1000,v=>v.toFixed(1),g,'<div class="sm mu" style="margin-top:6px">'+LEGW+'</div>','Hidratação · todo o período',v=>v.filter(x=>x>=g).length+' com meta batida']}[t],
  D=t==='wt'?L.map(x=>[x[0],S.water[k(x[0])]||0]):L,vs=D.map(x=>Z[0](x[1]));
- c.innerHTML='<div class="row" style="align-items:center;flex-wrap:nowrap"><h2 style="margin:0;flex:1">'+Z[4]+'</h2><button class="g" style="flex:0 0 44px;padding:0" onclick="ovx()">✕</button></div>'+(n?'<div class="sm mu" style="margin:4px 0 10px">'+f(L[0])+' – '+f(L[n-1])+' · '+n+' dias · '+Z[5](vs,L)+'</div><div class="sc" id="osc">'+wkc(D,Z[0],Z[1],Z[2],150,38,1,t==='wt'?(d,r,v)=>!r?'':v>g?'w2':v>=g?'w1':'w0':0)+'</div>'+Z[3]:'<p class="mu" style="margin:8px 0 0">Ainda não há registros.</p>');
+ c.innerHTML='<div class="row" style="align-items:center;flex-wrap:nowrap"><h2 style="margin:0;flex:1">'+Z[4]+'</h2><button class="g" style="flex:0 0 44px;padding:0" onclick="ovx()">✕</button></div>'+(n?'<div class="sm mu" style="margin:4px 0 10px">'+f(L[0])+' – '+f(L[n-1])+' · '+n+' dias · '+Z[5](vs,L)+'</div><div class="sc" id="osc">'+wkc(D,Z[0],Z[1],Z[2],150,38,1,t==='wt'?(d,r,v)=>!r?'':v>g?'w2':v>=g?'w1':'w0':t==='st'?((d,r,v)=>!v?'':v>Z[2]?'b2':v>=Z[2]?'b1':'b0'):0)+'</div>'+Z[3]:'<p class="mu" style="margin:8px 0 0">Ainda não há registros.</p>');
  document.body.style.overflow='hidden';e.classList.add('on');const sc=$('osc');if(sc)sc.scrollLeft=sc.scrollWidth;
  if(M.animate&&!RM()){M.animate(c,{opacity:[0,1],transform:['scale(.9) translateY(30px)','scale(1) translateY(0px)']},{duration:.85,ease:EX});
   [...c.querySelectorAll('.wk i')].forEach((b,i)=>M.animate(b,{transform:['scaleY(0)','scaleY(1)']},{delay:.3+Math.min(i*.012,.8),duration:.9,ease:EX}))}}
 function ovb(){const c=calc(),w=ws(),e=BD.filter(x=>x[2](c,w));$('ovc').innerHTML='<div class="row" style="align-items:center;flex-wrap:nowrap"><h2 style="margin:0;flex:1">Minhas conquistas ('+e.length+'/'+BD.length+')</h2><button class="g" style="flex:0 0 44px;padding:0" onclick="ovx()">✕</button></div>'+(e.length?'<div class="bd" style="margin-top:10px">'+e.map(x=>'<div class="ok"><span>'+x[0]+'</span>'+x[1]+'</div>').join('')+'</div>':'<p class="mu" style="margin:10px 0 0">Nenhuma conquista ainda. Bata sua primeira meta para desbloquear a primeira!</p>');document.body.style.overflow='hidden';$('ov').classList.add('on')}
+const hx=c=>{c=String(c).trim();if(c[0]!=='#')return[128,128,128];if(c.length<7)c='#'+c[1]+c[1]+c[2]+c[2]+c[3]+c[3];return[1,3,5].map(i=>parseInt(c.substr(i,2),16))},
+mixc=(a,b,t)=>{const A=hx(a),B=hx(b);return'rgb('+A.map((v,i)=>Math.round(v+(B[i]-v)*t)).join(',')+')'},rgba=(c,a)=>'rgba('+hx(c).join(',')+','+a+')';
+function rr(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath()}
+function sumCv(key){const W=1080,H=1920,cv=document.createElement('canvas');cv.width=W;cv.height=H;const x=cv.getContext('2d'),css=getComputedStyle(document.documentElement),v=n=>css.getPropertyValue(n).trim(),
+ bg=v('--bg'),g1=v('--g1'),g2=v('--g2'),pr=v('--pr'),or=v('--or'),tx=v('--tx'),mu=v('--mu'),B=hx(bg),dark=(B[0]*.299+B[1]*.587+B[2]*.114)<110,
+ r=S.days[key]||{min:0},m=r.min||0,g=r.g||S.cfg.goal,km=r.km||0,st=r.st||0,sgl=+S.cfg.sg||6000,kc=kd(r),sp=spd(r),wa=wml(key)/1000,c=calc(),d=new Date(key+'T12:00:00'),
+ FN='system-ui,-apple-system,"Segoe UI",Roboto,"Noto Color Emoji","Apple Color Emoji",sans-serif',cf=dark?'rgba(255,255,255,.08)':'rgba(255,255,255,.62)',cs=dark?'rgba(255,255,255,.18)':'rgba(255,255,255,.95)',tr=dark?'rgba(255,255,255,.15)':'rgba(20,34,26,.13)';
+ x.fillStyle=bg;x.fillRect(0,0,W,H);
+ [[240,300,g1,1],[900,1600,g2,1],[860,420,pr,.18],[220,1380,or,.12]].forEach(a=>{const gr=x.createRadialGradient(a[0],a[1],0,a[0],a[1],900);gr.addColorStop(0,rgba(a[2],a[3]));gr.addColorStop(1,rgba(a[2],0));x.fillStyle=gr;x.fillRect(0,0,W,H)});
+ x.textBaseline='alphabetic';x.textAlign='left';x.fillStyle=tx;x.font='700 56px '+FN;x.fillText('🚶 Passo a Passo',80,140);
+ let ds=d.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'});ds=ds[0].toUpperCase()+ds.slice(1);x.fillStyle=mu;x.font='500 42px '+FN;x.fillText(ds,80,208);
+ x.fillStyle=tx;x.font='800 92px '+FN;x.fillText(m>=g?'Meta batida!':'Meu dia de caminhada',80,350,920);
+ if(S.cfg.name){x.fillStyle=mu;x.font='600 44px '+FN;x.fillText(S.cfg.name,80,415,920)}
+ const cx=540,cy=770,R=235,a0=-Math.PI/2,p=Math.min(m/g,1);x.lineWidth=46;x.lineCap='round';x.strokeStyle=tr;x.beginPath();x.arc(cx,cy,R,0,Math.PI*2);x.stroke();
+ if(p>0){const lg=x.createLinearGradient(cx-R,cy-R,cx+R,cy+R);lg.addColorStop(0,pr);lg.addColorStop(1,m>g?or:mixc(pr,'#ffffff',.48));x.strokeStyle=lg;x.shadowColor=rgba(pr,.5);x.shadowBlur=30;x.beginPath();x.arc(cx,cy,R,a0,a0+Math.PI*2*p);x.stroke();x.shadowBlur=0}
+ x.textAlign='center';x.fillStyle=tx;const mt=m>=100?Math.floor(m/60)+'h'+pad(m%60):String(m);x.font='800 '+(mt.length>3?150:190)+'px '+FN;x.fillText(mt,cx,cy+50);x.fillStyle=mu;x.font='600 44px '+FN;x.fillText('de '+g+' min',cx,cy+120);
+ const bt=m>=g?'🎉 Meta batida'+(m>g?' · +'+(m-g)+' min':''):'Faltaram '+(g-m)+' min para a meta';x.font='700 42px '+FN;const bw=Math.min(x.measureText(bt).width+90,920);rr(x,cx-bw/2,1090,bw,92,46);
+ if(m>=g){const lg=x.createLinearGradient(cx-bw/2,0,cx+bw/2,0);lg.addColorStop(0,pr);lg.addColorStop(1,or);x.fillStyle=lg;x.fill();x.fillStyle='#fff'}else{x.fillStyle=cf;x.fill();x.strokeStyle=cs;x.lineWidth=3;x.stroke();x.fillStyle=tx}
+ x.fillText(bt,cx,1152,bw-40);
+ const card=(a,b,ic,lab,val,un,pg,sub)=>{const w=440,h=250;rr(x,a,b,w,h,44);x.fillStyle=cf;x.fill();x.strokeStyle=cs;x.lineWidth=3;x.stroke();x.textAlign='left';x.fillStyle=mu;x.font='600 36px '+FN;x.fillText(ic+' '+lab,a+40,b+72);
+  let fs=96;while(fs>48){x.font='800 '+fs+'px '+FN;const u=x.measureText(val).width;x.font='600 '+Math.round(fs*.42)+'px '+FN;if(u+14+x.measureText(un).width<=w-80)break;fs-=4}
+  x.font='800 '+fs+'px '+FN;x.fillStyle=tx;const vw=x.measureText(val).width;x.fillText(val,a+40,b+172);x.font='600 '+Math.round(fs*.42)+'px '+FN;x.fillStyle=mu;x.fillText(un,a+54+vw,b+172);
+  if(pg!=null){rr(x,a+40,b+204,w-80,16,8);x.fillStyle=tr;x.fill();if(pg>0){rr(x,a+40,b+204,Math.max(16,(w-80)*pg),16,8);const lg=x.createLinearGradient(a+40,0,a+w-40,0);lg.addColorStop(0,pr);lg.addColorStop(1,or);x.fillStyle=lg;x.fill()}}else if(sub){x.font='500 32px '+FN;x.fillStyle=mu;x.fillText(sub,a+40,b+226)}};
+ card(80,1230,'👣','Passos',fm(st),'passos',Math.min(st/sgl,1));card(560,1230,'📍','Distância',km.toFixed(2),'km',null,'');
+ card(80,1520,'🔥','Calorias',String(kc),'kcal',null,'');card(560,1520,'⚡','Velocidade',sp>0?sp.toFixed(1):'—','km/h',null,sp>0?pc(60,sp)+' min/km':'');
+ x.textAlign='center';x.fillStyle=tx;x.font='600 40px '+FN;const ex=[];if(key===today()&&c.st)ex.push('🔥 '+c.st+' dia'+(c.st>1?'s':'')+' de ofensiva');if(wa>0)ex.push('💧 '+wa.toFixed(1).replace('.',',')+' L de água');if(ex.length)x.fillText(ex.join('   ·   '),cx,1840,920);
+ x.fillStyle=mu;x.font='500 30px '+FN;x.fillText('Passo a Passo · meta de caminhada',cx,1890);return cv}
+let SCV=null;
+function ovs(key){key=key||today();const r=S.days[key];if(!r||!(r.min||r.st))return toast('Registre uma caminhada para gerar o resumo');
+ try{SCV=sumCv(key)}catch(e){return toast('Não consegui gerar o resumo')}
+ $('ovc').innerHTML='<div class="row" style="align-items:center;flex-wrap:nowrap"><h2 style="margin:0;flex:1">Resumo do dia</h2><button class="g" style="flex:0 0 44px;padding:0" onclick="ovx()">✕</button></div><img alt="Resumo do dia" src="'+SCV.toDataURL('image/png')+'" style="display:block;width:auto;max-width:100%;max-height:56vh;margin:10px auto;border-radius:14px"><div class="row"><button onclick="shr(\''+key+'\')">📤 Compartilhar</button><button class="g" onclick="svi(\''+key+'\')">💾 Salvar imagem</button></div>';
+ document.body.style.overflow='hidden';$('ov').classList.add('on')}
+const cvb=()=>new Promise(r=>SCV.toBlob(r,'image/png'));
+async function svi(key){if(!SCV)return;const b=await cvb();if(!b)return toast('Não consegui gerar a imagem');const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='passoapasso-'+key+'.png';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);toast('Imagem salva ✅ Veja em Downloads')}
+async function shr(key){if(!SCV)return;const b=await cvb();if(!b)return;const f=new File([b],'passoapasso-'+key+'.png',{type:'image/png'});
+ try{if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:'Passo a Passo',text:'Meu dia no Passo a Passo 🚶'});return}}catch(e){if(e&&e.name==='AbortError')return}
+ toast('Compartilhar não disponível aqui. Salvando a imagem…');svi(key)}
 function ovx(){const e=$('ov');if(!e.classList.contains('on'))return;unpick();document.body.style.overflow='';e.classList.remove('on');if(M.animate&&!RM())M.animate($('ovc'),{opacity:[1,0],transform:['scale(1) translateY(0px)','scale(.94) translateY(20px)']},{duration:.3,ease:'easeIn'})}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')ovx()});
 if(/Android/i.test(navigator.userAgent))document.documentElement.classList.add('and');
@@ -438,7 +490,7 @@ function ding(w,k){let id=S.cfg.snd||'beep';if(id==='sys')id=window.Notification
 function ssnd(id){S.cfg.snd=id;save();render();if(id==='none')toast('Som desativado');else if(id==='sys'){(async()=>{try{if('Notification' in window&&Notification.permission==='default')await Notification.requestPermission()}catch(e){}notify('Passo a Passo','Som padrão de notificação do sistema')})()}else try{SND[id]()}catch(e){}}
 function svib(id){S.cfg.vib=id;save();render();if(id==='off')return toast('Vibração desativada');if(!navigator.vibrate)return toast('Este aparelho não suporta vibração');navigator.vibrate(VIB[id])}
 const WALK='<div class="wcol"><div class="wit row" style="align-items:center;flex-wrap:nowrap"><button class="g" style="flex:0 0 auto" onclick="walkClose()">'+IC.dn+'Minimizar</button><div class="sm mu" style="flex:1;text-align:right">Caminhada em andamento</div></div>'+
-'<div class="wit cd wp c"><div class="rw rt" onclick="ringTap(this,1)"><svg viewBox="0 0 130 130" width="236"><defs><linearGradient id="wgd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--pr)"/><stop offset="1" style="stop-color:color-mix(in srgb,var(--pr) 52%,#fff)"/></linearGradient></defs><circle class="rb" cx="65" cy="65" r="54"/><circle id="wrf" class="rf" cx="65" cy="65" r="54" stroke-dasharray="339.3" stroke-dashoffset="339.3" transform="rotate(-90 65 65)" style="stroke:url(#wgd)"/><text id="wtm" x="65" y="68" text-anchor="middle" font-size="25" font-weight="700" fill="currentColor">00:00</text><text id="wgl" x="65" y="86" text-anchor="middle" font-size="8.5" fill="currentColor" opacity=".65"></text></svg><i class="rsh"></i><i class="rso"></i></div><div class="wn"><span id="wd">0.00</span><small> km</small></div><div class="sm mu">distância percorrida</div></div>'+
+'<div class="wit cd wp c"><div class="rw rt" onclick="ringTap(this,1)"><svg viewBox="0 0 130 130" width="236"><defs><linearGradient id="wgd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--pr)"/><stop offset="1" style="stop-color:color-mix(in srgb,var(--pr) 52%,#fff)"/></linearGradient></defs><circle class="rb" cx="65" cy="65" r="54"/><circle id="wrf" class="rf" cx="65" cy="65" r="54" stroke-dasharray="339.3" stroke-dashoffset="339.3" transform="rotate(-90 65 65)" style="stroke:url(#wgd)"/><text id="wtm" x="65" y="68" text-anchor="middle" font-size="25" font-weight="700" fill="currentColor">00:00</text><text id="wgl" x="65" y="86" text-anchor="middle" font-size="8.5" fill="currentColor" opacity=".65"></text></svg><i class="rsh"></i><i class="rso"></i></div><div class="wn"><span id="wd">0.00</span><small> km</small></div><div class="sm mu">distância percorrida</div><div class="wn" style="margin-top:10px"><span id="wss">0</span><small> passos</small></div><div class="sm mu" id="wsn"></div></div>'+
 '<div class="wit row" style="gap:10px"><div class="cd c"><div class="wn2" id="wsp">0.0</div><div class="sm mu">km/h agora</div></div><div class="cd c"><div class="wn2" id="wav">0.0</div><div class="sm mu">km/h média</div></div><div class="cd c"><div class="wn2" id="wkc">0</div><div class="sm mu">kcal</div></div></div>'+
 '<div class="wit cd"><div class="row" style="align-items:baseline;flex-wrap:nowrap"><h2 style="margin:0;flex:1">Velocidade ao longo do tempo</h2><div class="sm mu" style="flex:0 0 auto" id="wpkv"></div></div>'+
 '<svg id="wsv" class="wsv" viewBox="0 0 320 150" width="100%" style="display:block;margin-top:8px;overflow:visible"><defs><linearGradient id="wga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--pr);stop-opacity:.34"/><stop offset="1" style="stop-color:var(--pr);stop-opacity:0"/></linearGradient><linearGradient id="wgl" gradientUnits="userSpaceOnUse" x1="0" y1="18" x2="0" y2="132"><stop offset="0" style="stop-color:var(--or)"/><stop offset="1" style="stop-color:var(--pr)"/></linearGradient></defs>'+
@@ -459,7 +511,7 @@ function walkTick(){const T=S.timer;if(!T||!T.s)return;const s=Math.floor((Date.
  const gl=$('wgl');if(gl)gl.textContent=ov?'meta superada +'+Math.floor(dn-S.cfg.goal)+' min':'meta de '+S.cfg.goal+' min';
  if($('walk').classList.contains('on'))walkUI(s)}
 function walkUI(s){const T=S.timer;if(!T||!$('wtm'))return;const km=(T.d||0)/1000,hh=Math.floor(s/3600),mm=Math.floor(s%3600/60),av=s>15&&km>0?km/(s/3600):0,cs=Date.now()-G.t<8000?(G.cs||0):0;
- $('wtm').textContent=(hh?hh+':':'')+pad(mm)+':'+pad(s%60);$('wd').textContent=km.toFixed(2);$('wsp').textContent=cs.toFixed(1);$('wav').textContent=av.toFixed(1);$('wkc').textContent=Math.round(kcal(s/60,av));
+ $('wtm').textContent=(hh?hh+':':'')+pad(mm)+':'+pad(s%60);$('wd').textContent=km.toFixed(2);$('wsp').textContent=cs.toFixed(1);$('wav').textContent=av.toFixed(1);$('wkc').textContent=Math.round(kcal(s/60,av));$('wss').textContent=fm(lst(T));{const q=$('wsn');if(q)q.textContent=S.cfg.sc&&T.p>=10?'contados pelo sensor de movimento':T.d>0?'estimados pela distância':S.cfg.sc?(SP.has?'aguardando os primeiros passos…':'sensor sem dados'):'contador desligado'}
  $('wgp').innerHTML=S.cfg.gps?gst():'GPS desligado. Ative em Ajustes para medir distância e velocidade.';wchart(T.h||[])}
 function wchart(h){const W=320,H=150,L=6,R=6,P=18,B=18,e=i=>$(i),n=h.length;
  if(n<2){e('wpath').setAttribute('d','');e('warea').setAttribute('d','');e('wpts').innerHTML='';e('wpk').style.display='none';e('whd').style.display='none';e('wnd').style.display='';e('wpkv').textContent='';return}
@@ -489,10 +541,13 @@ function T0(){const c=calc(),d=S.days[sel],m=d?d.min:0,g=(d&&d.g)||S.cfg.goal,lv
  return`${isT?gm(m,g,c):''}<div class="cd c${m>=g?' win':''}${m+lv>g?' ov':''}"><div class="sm mu">${lbl}</div>
 <div class="rw rt" onclick="ringTap(this)" onkeydown="if(event.key==='Enter')ringTap(this)" role="button" tabindex="0" aria-label="Abrir tela da caminhada"><i class="gl go"></i><i class="gl gi"></i><svg viewBox="0 0 130 130" width="180"><defs><linearGradient id="rgd" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--pr)"/><stop offset="1" style="stop-color:color-mix(in srgb,var(--pr) 52%,#fff)"/></linearGradient></defs><circle class="rb" cx="65" cy="65" r="54"/><circle class="rf" cx="65" cy="65" r="54" stroke-dasharray="${C}" stroke-dashoffset="${C*(1-p)}" transform="rotate(-90 65 65)" style="stroke:url(#rgd)"/><text x="65" y="70" text-anchor="middle" font-size="28" font-weight="800" fill="currentColor" data-cu="${m}" data-k="ring">${m}</text><text x="65" y="88" text-anchor="middle" font-size="11" fill="currentColor" opacity=".6">de ${g} min</text></svg>${isT?'<i class="rsh"></i><i class="rso"></i>':''}</div>
 <div>${m>=g?'🎉 Meta batida! Ótimo trabalho!':m>=g/2?'Mais da metade! Faltam '+(g-m)+' min':'Faltam '+(g-m)+' min. Cada passo conta 👟'}</div>${d&&d.km?`<div class="sm mu">📍 ${d.km.toFixed(2)} km${spd(d)>0?' · ⚡ '+spd(d).toFixed(1)+' km/h · '+pc(60,spd(d))+' min/km':''} · 🔥 ${kd(d)} kcal</div>`:d&&d.min?`<div class="sm mu">🔥 ${kd(d)} kcal</div>`:''}
+${d&&d.st?`<div class="sm mu">👣 ${fm(d.st)} passos</div>`:''}
 ${isT?'':'<button class="g" style="margin-top:8px" onclick="go(today())">Voltar para hoje</button>'}</div>
 <div class="cd" id="tcard">${tmr()}</div>
+<div class="cd"><h2>👣 Passos</h2><div class="row" style="align-items:flex-end;flex-wrap:nowrap"><div style="flex:2"><span class="big" id="stn">${fm(stT())}</span> <span class="mu">de ${fm(+S.cfg.sg||6000)}</span></div><div class="mu" id="stp" style="flex:1;text-align:right">${Math.round(stT()/(+S.cfg.sg||6000)*100)}%</div></div><div class="bar" style="margin:10px 0 0"><i id="stb" style="width:${Math.min(stT()/(+S.cfg.sg||6000)*100,100)}%"></i></div></div>
+<div class="cd"><h2>📸 Resumo do dia</h2><p class="sm mu" style="margin:0 0 10px">Imagem com as suas estatísticas no tema escolhido, pronta para compartilhar nas redes sociais.</p><button style="width:100%" onclick="ovs(sel)">Ver resumo e compartilhar</button></div>
 <div class="cd"><h2>➕ Registrar ${isT?'hoje':'neste dia'}</h2><div class="row">${[5,10,15,30].map(x=>`<button class="g" onclick="add(${x})">+${x}</button>`).join('')}</div>
-<div class="row" style="margin-top:8px"><input id="cm" type="number" inputmode="numeric" placeholder="minutos"><input id="ck" type="number" inputmode="decimal" placeholder="km (opcional)"></div>
+<div class="row" style="margin-top:8px"><input id="cm" type="number" inputmode="numeric" placeholder="minutos"><input id="ck" type="number" inputmode="decimal" placeholder="km (opcional)"></div><div class="row" style="margin-top:8px"><input id="cp" type="number" inputmode="numeric" placeholder="passos (opcional)"></div>
 <button style="width:100%;margin-top:8px" onclick="ad()">Adicionar</button>${d?'<button class="g" style="width:100%;margin-top:8px" onclick="ask(\'z\',zr,this)">Zerar este dia</button>':''}</div>
 ${wcard()}
 <div class="cd"><h2>⚖️ Peso</h2><div class="row"><input id="wi" type="number" inputmode="decimal" step="0.1" placeholder="kg" value="${S.weights[sel]||''}"><button onclick="pw()">Salvar peso</button></div></div>`}
@@ -504,18 +559,22 @@ function T1(){const c=calc(),w=ws(),[ch,hits]=cal(),mg=S.cfg.mg||20,b=new Date()
 <div class="sm" style="margin:8px 0 4px">Desafio do mês: <b><span data-cu="${hits}" data-k="hits1">${hits}</span>/${mg} dias</b> ${hits>=mg?'🏆 Concluído!':''}</div><div class="bar"><i style="width:${Math.min(hits/mg,1)*100}%"></i></div><div style="height:10px"></div>${ch}<div class="sm mu" style="margin-top:6px">Toque em um dia para registrar ou editar (útil para lançar caminhadas passadas).</div></div>
 <div class="cd"><h2>🏆 Conquistas</h2><div class="bd">${BD.map(x=>`<div class="${x[2](c,w)?'ok':''}"><span>${x[0]}</span>${x[1]}</div>`).join('')}</div></div>`}
 
+function sk(L){const g=+S.cfg.sg||6000,ds=Object.keys(S.days).filter(d=>S.days[d].st>0),tot=ds.reduce((a,d)=>a+S.days[d].st,0),k7=L.reduce((a,x)=>a+(x[1]&&x[1].st||0),0),avg=ds.length?Math.round(tot/ds.length):0,best=Math.max(0,...ds.map(d=>S.days[d].st)),hits=ds.filter(d=>S.days[d].st>=g).length;
+ return`<div class="cd">${sg('👣 Passos','st')}<div class="row c"><div><div class="big" data-cu="${tot}" data-k="stt">${tot}</div><div class="sm mu">passos no total</div></div><div><div class="big" data-cu="${k7}" data-k="st7">${k7}</div><div class="sm mu">passos em 7 dias</div></div><div><div class="big" data-cu="${avg}" data-k="sta">${avg}</div><div class="sm mu">por dia (média)</div></div></div><div style="margin-top:12px">${wkc(L,r=>r&&r.st||0,v=>v>=1000?(v/1000).toFixed(1)+'k':v,g,84,0,0,(d,r,v)=>!v?'':v>g?'b2':v>=g?'b1':'b0')}</div>${LEG}<div class="sm mu" style="margin-top:6px">Melhor dia: ${fm(best)} passos · ${hits} dia(s) com a meta de ${fm(g)}</div></div>`}
 function T2(){const c=calc(),w=ws(),g=S.cfg.goal,tw=+S.cfg.tw,h=+S.cfg.h,
  L=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);return[d,S.days[k(d)]]}),h7=L.filter(x=>hit(x[1])).length,
  imc=h&&w.cur?w.cur/((h/100)**2):0,pct=tw&&w.sw>tw?Math.min(w.lost/(w.sw-tw),1)*100:-1;
  return`<div class="cd"><div class="row c"><div><div class="big" data-cu="${c.tot}" data-t="t" data-k="tot2">${Math.floor(c.tot/60)}h${pad(c.tot%60)}</div><div class="sm mu">tempo total</div></div><div><div class="big" data-cu="${Object.keys(S.days).length}" data-k="days2">${Object.keys(S.days).length}</div><div class="sm mu">dias</div></div><div><div class="big" data-cu="${c.km}" data-d="1" data-k="km2">${c.km.toFixed(1)}</div><div class="sm mu">km</div></div></div></div>
 <div class="cd"><div class="row" style="align-items:center;flex-wrap:nowrap;margin-bottom:8px"><h2 style="margin:0;flex:1">Histórico</h2><div class="seg" style="flex:0 0 auto"><button class="g on">7 dias</button><button class="g" onclick="ovo()">Todo período</button></div></div>${wkc(L,r=>r?r.min:0,v=>v,g)}<div class="sm mu" style="margin-top:6px"><span class="lg b0"></span>abaixo da meta<span class="lg b1"></span>meta batida<span class="lg b2"></span>além da meta · linha tracejada = meta</div></div>
-${dk(L)}${kk(L)}${wdk(L)}${wpg(L)}
+${dk(L)}${sk(L)}${kk(L)}${wdk(L)}${wpg(L)}
 <div class="cd"><h2>🎯 Progressão da meta</h2>${h7>=6&&g<90?`<p>Você bateu a meta em ${h7} dos últimos 7 dias. Pronto para o próximo nível?</p><button onclick="up()">Subir para ${g+5} min/dia</button>`:`<p class="mu" style="margin:0">Meta atual: ${g} min/dia. Bata a meta em 6 de 7 dias (você está em ${h7}) para liberar +5 min.</p>`}</div>
 <div class="cd"><h2>⚖️ Peso</h2>${w.cur?`<div class="sm">${w.lost>0?'Já perdeu <b>'+w.lost+' kg</b>':'Registre seu peso para acompanhar'}${pct>=0?' · '+Math.round(pct)+'% da meta':''}</div>`:'<p class="mu sm">Registre seu peso na aba Hoje.</p>'}${pct>=0?`<div class="bar" style="margin:6px 0"><i style="width:${pct}%"></i></div>`:''}${wch(w.a,tw)}${imc?`<div class="sm mu">IMC ${imc.toFixed(1)} · ${imc<18.5?'abaixo do peso':imc<25?'normal':imc<30?'sobrepeso':'obesidade'}</div>`:''}</div>`}
 
 function T3(){return`<div class="cd"><h2>👤 Seu nome</h2><p class="sm mu" style="margin:0">Usado nas mensagens de incentivo.</p>${F('Como quer ser chamado(a)?','name','text')}</div>
 <div class="cd"><h2>🎨 Tema</h2><div class="ths">${TH.map(t=>`<button class="th${(S.cfg.theme||'auto')===t[0]?' on':''}" onclick="sth('${t[0]}')"><i style="background:linear-gradient(135deg,${t[2]} 50%,${t[3]} 50%)"></i>${t[1]}</button>`).join('')}</div></div>
 <div class="cd"><h2>🎯 Metas</h2>${F('Meta diária (minutos)','goal')}${F('Desafio do mês (dias com meta batida)','mg')}${F('Peso inicial (kg)','sw')}${F('Peso desejado (kg)','tw')}${F('Altura (cm)','h')}</div>
+<div class="cd"><h2>👣 Contador de passos</h2><p class="sm mu" style="margin:0 0 8px">Durante a caminhada, o app conta os passos pelo sensor de movimento do celular. Mantenha o app aberto e a tela ligada. Se o sensor não responder, os passos são estimados pela distância e pelo tamanho do seu passo.</p>${F('Meta diária (passos)','sg')}${F('Tamanho do passo (cm, opcional)','sl')}<p class="sm mu" style="margin:6px 0 0">Em branco, uso ${(str()*100).toFixed(0)} cm (estimado pela sua altura).</p><button class="g" style="width:100%;margin-top:8px" onclick="tsc()">${S.cfg.sc?'👣 Sensor ligado (toque para desligar)':'👣 Sensor desligado (toque para ligar)'}</button><button class="g" style="width:100%;margin-top:8px" onclick="tst()">🧪 Testar sensor agora</button></div>
+<div class="cd"><h2>📸 Resumo diário</h2><p class="sm mu" style="margin:0">Todo dia, no horário escolhido, o app avisa que o resumo está pronto. Na aba Hoje você salva a imagem ou compartilha, nas cores do tema escolhido.</p>${F('Horário do aviso','srt','time')}<div class="row" style="margin-top:10px"><button onclick="tsr()">${S.cfg.sr?'🔕 Desativar aviso':'📸 Ativar aviso'}</button><button class="g" onclick="ovs(today())">Ver resumo de hoje</button></div></div>
 <div class="cd"><h2>📍 Distância (GPS)</h2><p class="sm mu" style="margin:0 0 8px">Ao iniciar o cronômetro, o app mede os km pelo GPS do celular e soma ao dia quando você finaliza. Mantenha o app aberto e a tela ligada: com a tela apagada ou o app em segundo plano o Android pausa o GPS (o app tenta manter a tela acesa sozinho). Sua localização não sai do aparelho. Sem sinal ou dentro de casa, informe os km manualmente.</p><button class="g" style="width:100%" onclick="tgps()">${S.cfg.gps?'📡 GPS ligado (toque para desligar)':'📡 GPS desligado (toque para ligar)'}</button><button class="g" style="width:100%;margin-top:8px" onclick="tgt()">🧪 Testar GPS agora</button></div>
 <div class="cd"><h2>💧 Hidratação</h2>${F('Meta diária (litros)','wg')}${F('Intervalo entre lembretes (minutos)','wi')}${F('Início dos lembretes','ws','time')}${F('Fim dos lembretes','we','time')}<div class="row" style="margin-top:10px"><button onclick="twr()">${S.cfg.wr?'🔕 Desativar lembretes':'💧 Ativar lembretes'}</button><button class="g" onclick="notify('💧 Hora de beber água','Teste: lembrete funcionando')">Testar</button></div><p class="sm mu" style="margin:8px 0 0">Os lembretes aparecem com o app aberto. Ative os avisos abaixo para receber também a notificação do sistema.</p></div>
 <div class="cd"><h2>🔔 Lembretes</h2><p class="sm mu" style="margin:0">Os avisos aparecem com o app aberto (mensagem na tela, vibração, som e notificação do navegador quando permitida). Às 20:30 aviso se sua ofensiva estiver em risco.</p>${F('Lembrete 1','r0','time',S.cfg.r[0])}${F('Lembrete 2','r1','time',S.cfg.r[1])}
@@ -528,7 +587,8 @@ function T3(){return`<div class="cd"><h2>👤 Seu nome</h2><p class="sm mu" styl
 function render(a){unpick();ap();$('m').innerHTML=[T0,T1,T2,T3][tab]();const c=calc();chips(c,a);
  document.querySelectorAll('nav button').forEach((b,i)=>b.classList.toggle('on',i===tab));$('ni').style.transform='translateX('+tab*100+'%)';tick();if(a)intro();else post()}
 const go=d=>{sel=d;nv(0)},mv=n=>{vm=Math.min(vm+n,0);render();calAnim($('m'),0)};
-render(1);setInterval(tick,1000);setInterval(chk,20000);document.addEventListener('visibilitychange',()=>{chk();if(!document.hidden&&S.timer&&S.timer.s&&S.cfg.gps){wake();if(Date.now()-G.t>15000){gpsOff();gpsOn()}}});chk();if(S.timer&&S.timer.s)gpsOn();
+render(1);setInterval(tick,1000);setInterval(chk,20000);document.addEventListener('visibilitychange',()=>{chk();if(!document.hidden&&S.timer&&S.timer.s){wake();if(S.cfg.gps&&Date.now()-G.t>15000){gpsOff();gpsOn();wake()}}});chk();if(S.timer&&S.timer.s){gpsOn();stepOn()}
+try{matchMedia('(prefers-color-scheme:dark)').addEventListener('change',ap)}catch(e){}
 if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>
 </body>
