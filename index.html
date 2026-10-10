@@ -111,8 +111,8 @@ nav i{position:absolute;top:-1px;left:0;width:25%;height:3px;border-radius:3px;b
 .seg button.on{background:var(--pr);color:var(--on)}
 .rw{position:relative;display:inline-block;line-height:0}.rw svg{position:relative}
 .gl{position:absolute;left:50%;top:50%;border-radius:50%;pointer-events:none;z-index:-1;opacity:0;transition:opacity .6s ease-out}
-.gl.go{width:166px;height:166px;margin:-83px 0 0 -83px;box-shadow:0 0 16px 1px color-mix(in srgb,var(--pr) 36%,transparent)}
-.gl.gi{width:133px;height:133px;margin:-66.5px 0 0 -66.5px;box-shadow:inset 0 0 16px 1px color-mix(in srgb,var(--pr) 36%,transparent)}
+.gl.go{width:166px;height:166px;margin:-83px 0 0 -83px;box-shadow:0 0 16px color-mix(in srgb,var(--pr) 32%,transparent)}
+.gl.gi{width:133px;height:133px;margin:-66.5px 0 0 -66.5px;box-shadow:inset 0 0 14px color-mix(in srgb,var(--pr) 32%,transparent)}
 .cd.win .gl{opacity:1}
 .xp{overflow:hidden}
 #gs{margin:4px 0 8px;min-height:2.7em;display:flex;align-items:center;justify-content:center}
@@ -122,14 +122,42 @@ nav i{position:absolute;top:-1px;left:0;width:25%;height:3px;border-radius:3px;b
 main{padding:14px 16px}
 header{padding:6px 2px 14px}
 /* Border Beam - Magic UI (MIT), portado de React para CSS puro */
-.bbm{--lt:color-mix(in srgb,var(--pr) 45%,#fff);position:absolute;inset:-1px;border-radius:inherit;padding:2px;pointer-events:none;opacity:0;transition:opacity 1s ease-out;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.bbm{position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity 1s ease-out}
 .bbm.on{opacity:1}
-.bbm::after{content:"";position:absolute;width:110px;aspect-ratio:1;background:linear-gradient(to left,var(--lt),var(--pr),transparent);offset-anchor:90% 50%;offset-path:rect(0 auto auto 0 round 16px);animation:bbm 5.5s linear infinite}
+@supports(offset-path:rect(0 auto auto 0)){.bbm::after{content:"";position:absolute;width:96px;height:4px;border-radius:4px;background:linear-gradient(to right,transparent,color-mix(in srgb,var(--pr) 75%,transparent) 45%,color-mix(in srgb,var(--pr) 45%,#fff));box-shadow:0 0 10px 2px color-mix(in srgb,var(--pr) 70%,transparent),0 0 24px 5px color-mix(in srgb,var(--pr) 32%,transparent);offset-path:rect(0 auto auto 0 round 16px);animation:bbm 5.5s linear infinite,bbp 1.6s ease-in-out infinite}}
 @keyframes bbm{to{offset-distance:100%}}
+@keyframes bbp{0%,100%{opacity:.72}50%{opacity:1}}
 @supports not (offset-path:rect(0 auto auto 0)){.bbm{display:none}}
 @media(prefers-reduced-motion:reduce){.bbm::after{animation:none}}
 #tm{margin:12px 0 14px}#tm+button{margin-top:10px}
 #gs{margin:6px 0 18px}
+:root{--wt:#38bdf8}
+@property --p{syntax:"<percentage>";inherits:false;initial-value:0%}
+#tbtn.pb,#wbtn.pb{--p:0%;transition:--p 1s linear,box-shadow .5s ease-out;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.5);background:linear-gradient(90deg,var(--pr) calc(var(--p) - 6%),color-mix(in srgb,var(--pr) 60%,#fff) var(--p),color-mix(in srgb,var(--pr) 24%,transparent) var(--p))}
+#tbtn.pb.full,#wbtn.pb.full{box-shadow:0 0 24px color-mix(in srgb,var(--pr) 55%,transparent),inset 0 1px 0 rgba(255,255,255,.45)}
+#tbtn.pb.over,#wbtn.pb.over{background:linear-gradient(90deg,var(--pr),var(--or));animation:bp 1.7s ease-in-out infinite}
+@keyframes bp{0%,100%{box-shadow:0 0 12px 0 color-mix(in srgb,var(--pr) 40%,transparent)}50%{box-shadow:0 0 30px 5px color-mix(in srgb,var(--or) 60%,transparent)}}
+.bar.wt>i{background:linear-gradient(90deg,var(--wt),#7dd3fc)}
+.wwin .bar.wt>i{box-shadow:0 0 14px color-mix(in srgb,var(--wt) 60%,transparent)}
+.w0{--bc:color-mix(in srgb,var(--wt) 45%,transparent)}.w1{--bc:var(--wt)}.w2{--bc:linear-gradient(to top,var(--wt),#a5f3fc)}
+.wk .w2 i{box-shadow:0 0 12px color-mix(in srgb,var(--wt) 55%,transparent)}.wk .w2 small{font-weight:700;color:var(--wt)}
+nav{z-index:5;transform:translateZ(0);will-change:transform;backface-visibility:hidden}
+@media(prefers-reduced-motion:reduce){#tbtn.pb.over,#wbtn.pb.over,.hh{animation:none}.bbm{display:none}}
+#walk{position:fixed;inset:0;z-index:6;display:flex;flex-direction:column;padding:calc(12px + env(safe-area-inset-top,0px)) 16px calc(16px + env(safe-area-inset-bottom,0px));overflow:auto;background:color-mix(in srgb,var(--bg) 82%,transparent);-webkit-backdrop-filter:blur(22px) saturate(160%);backdrop-filter:blur(22px) saturate(160%);opacity:0;visibility:hidden;transform:translateY(24px);transition:opacity .45s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1),visibility 0s linear .6s}
+#walk.on{opacity:1;visibility:visible;transform:none;transition:opacity .45s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.16,1,.3,1),visibility 0s}
+.wcol{flex:1;display:flex;flex-direction:column;gap:12px;width:100%;max-width:520px;margin:0 auto}.wcol .cd{margin:0}
+.wp{padding:18px 14px 16px}
+.wtm{font-size:clamp(56px,17vw,84px);font-weight:700;letter-spacing:-.04em;line-height:1.02;font-variant-numeric:tabular-nums;font-family:"SF Pro Display",-apple-system,system-ui,"Segoe UI",Roboto,sans-serif}
+.wn{font-size:40px;font-weight:700;letter-spacing:-.03em;font-variant-numeric:tabular-nums}.wn small{font-size:17px;font-weight:600;color:var(--mu);letter-spacing:0}
+.wn2{font-size:34px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.wsv text{fill:var(--mu);font-size:9px}.wsv #wpkt{fill:var(--tx);font-weight:700;font-size:10px}
+.gx2{stroke:var(--tr);stroke-width:1}.wvl{stroke:var(--mu);stroke-width:1;stroke-dasharray:3 3;opacity:.7}
+.wlp{fill:none;stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+.wh1{fill:var(--or);stroke:#fff;stroke-width:1}.wh2{fill:color-mix(in srgb,var(--or) 28%,transparent)}.wpc{fill:var(--pr);stroke:#fff;stroke-width:1.5}
+.hh{fill:var(--pr);transform-box:fill-box;transform-origin:center;animation:hp 1.4s ease-out infinite}.hd{fill:#fff;stroke:var(--pr);stroke-width:2}
+@keyframes hp{0%{transform:scale(.7);opacity:.7}100%{transform:scale(2.6);opacity:0}}
+.ldot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--or);margin-right:5px}.ldot.pk{background:var(--pr);margin-left:12px}
+.sn{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.sn button.g{min-height:44px;padding:6px 2px;font-size:12.5px}.sn button.on{border-color:var(--pr);box-shadow:0 0 0 2px var(--pr)}
 </style>
 </head>
 <body>
@@ -137,7 +165,7 @@ header{padding:6px 2px 14px}
 <header><h1>🚶 Passo a Passo</h1><div><span class="chip" id="st"></span><span class="chip" id="pt"></span></div></header>
 <div id="m"></div>
 </main>
-<div id="ov" onclick="if(event.target===this)ovx()"><div id="ovc" class="cd"></div></div><div id="dc" class="cd"></div><div id="ts"></div>
+<div id="walk"></div><div id="ov" onclick="if(event.target===this)ovx()"><div id="ovc" class="cd"></div></div><div id="dc" class="cd"></div><div id="ts"></div>
 <nav><i id="ni"></i>
 <button onclick="nv(0)"><span>🏠</span>Hoje</button>
 <button onclick="nv(1)"><span>🔥</span>Ofensiva</button>
@@ -150,7 +178,7 @@ header{padding:6px 2px 14px}
 <script>
 const KEY='passoapasso:v1',$=id=>document.getElementById(id),pad=n=>String(n).padStart(2,'0'),
 k=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()),today=()=>k(new Date()),
-def=()=>({v:1,cfg:{goal:30,mg:20,sw:'',tw:'',h:'',n:false,gps:true,name:'',r:['07:00','18:00']},days:{},weights:{},timer:null,fl:''}),
+def=()=>({v:1,cfg:{goal:30,mg:20,sw:'',tw:'',h:'',n:false,gps:true,name:'',snd:'beep',vib:'double',wg:2,wr:false,wi:90,ws:'08:00',we:'21:00',r:['07:00','18:00']},days:{},weights:{},water:{},wlast:0,timer:null,fl:''}),
 LV=['Iniciante','Caminhante','Persistente','Imparável','Atleta','Lenda'];
 let S,tab=0,sel=today(),vm=0,tt,armed=null;
 try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
@@ -170,8 +198,8 @@ BD=[['👟','Primeiro passo',c=>c.tot>0],['🔥','3 dias seguidos',c=>c.best>=3]
 function toast(m,w){const t=$('ts');t.textContent=m;t.classList.toggle('win',!!w);t.classList.add('on');clearTimeout(tt);const A=M.animate&&!RM();
  if(A)M.animate(t,{opacity:[0,1],transform:['translateY(30px) scale(.9)','translateY(0px) scale(1)']},{duration:.7,ease:[.34,1.4,.64,1]});
  tt=setTimeout(()=>{if(A)M.animate(t,{opacity:[1,0],transform:['translateY(0px) scale(1)','translateY(16px) scale(.96)']},{duration:.3,ease:'easeIn'});setTimeout(()=>t.classList.remove('on'),A?300:0)},Math.max(w?4500:3200,m.length*70))}
-function notify(t,b,w){toast(t+' '+b,w);try{navigator.vibrate&&navigator.vibrate([150,80,150])}catch(e){}
- try{const a=new AudioContext(),o=a.createOscillator();o.connect(a.destination);o.frequency.value=880;o.start();o.stop(a.currentTime+.2)}catch(e){}
+function notify(t,b,w,k){toast(t+' '+b,w);ding(w,k);
+ 
  if(S.cfg.n)try{navigator.serviceWorker.getRegistration().then(r=>r?r.showNotification(t,{body:b,icon:'icon-192.png',vibrate:[150,80,150]}):new Notification(t,{body:b})).catch(()=>{})}catch(e){try{new Notification(t,{body:b})}catch(e){}}}
 function ask(id,fn,el){if(armed===id){armed=null;fn()}else{armed=id;const t=el.textContent;el.textContent='Toque de novo para confirmar';setTimeout(()=>{if(armed===id){armed=null;el.textContent=t}},3500)}}
 
@@ -181,27 +209,31 @@ const ad=()=>{const m=Math.round(+$('cm').value),km=+$('ck').value;m>0||km>0?add
 zr=()=>{delete S.days[sel];save();render()},rs=()=>{S=def();save();sel=today();render()},
 pw=()=>{const v=+$('wi').value;if(v>0){S.weights[sel]=v;save();render();toast('Peso salvo ⚖️')}},
 up=()=>{sc('goal',S.cfg.goal+5);render()};
-function tg(){if(tgb)return;const card=$('tcard'),A=!!card&&!!M.animate&&!RM();
+function tg(){if(tgb)return;const card=$('tcard'),A=!!card&&!!M.animate&&!RM(),wo=$('walk').classList.contains('on');
  if(S.timer&&S.timer.s){const m=Math.round((Date.now()-S.timer.s)/60000),km=+((S.timer.d||0)/1000).toFixed(2),
   fin=()=>{S.timer=null;gpsOff();lp=null;sel=today();m>0?add(m,km):(save(),render())},xp=A&&$('xp');
-  if(!xp)return fin();
-  tgb=1;const bm=card.querySelector('.bbm');if(bm)bm.classList.remove('on');[$('gs'),$('tk')].forEach((e,j)=>M.animate(e,{opacity:[1,0],transform:['translateY(0px)','translateY(12px)']},{delay:j*.08,duration:.4,ease:[.4,0,.6,1]}));
+  if(wo)walkClose();
+  if(wo||!xp)return fin();
+  tgb=1;card.querySelectorAll('.bbm').forEach(e=>e.classList.remove('on'));
+  [$('gs'),$('tk')].forEach((e,j)=>M.animate(e,{opacity:[1,0],transform:['translateY(0px)','translateY(12px)']},{delay:j*.08,duration:.4,ease:[.4,0,.6,1]}));
   setTimeout(()=>{M.animate(xp,{height:[xp.offsetHeight+'px','0px']},{duration:.65,ease:[.65,0,.25,1]});setTimeout(()=>{tgb=0;fin()},690)},240)}
- else{S.timer={s:Date.now(),d:0};lp=null;G={st:'',n:0,t:0,acc:0,cs:0};save();gpsOn();
-  if(!A){render();return}
-  card.innerHTML=tmr(1);tick();const bm=card.querySelector('.bbm');if(bm){void bm.offsetWidth;bm.classList.add('on')}const xp=$('xp');if(!xp)return;
-  try{const h=xp.offsetHeight;xp.style.height='0px';M.animate(xp,{height:['0px',h+'px']},{duration:1.1,ease:[.34,1.5,.64,1]});setTimeout(()=>{xp.style.height=''},1200);
+ else{S.timer={s:Date.now(),d:0,h:[]};lp=null;G={st:'',n:0,t:0,acc:0,cs:0};save();gpsOn();
+  if(!A){render();walkOpen();return}
+  card.innerHTML=tmr(1);tick();const bm=card.querySelector('.bbm');if(bm){void bm.offsetWidth;bm.classList.add('on')}
+  const xp=$('xp');
+  if(xp)try{const h=xp.offsetHeight;xp.style.height='0px';M.animate(xp,{height:['0px',h+'px']},{duration:1.1,ease:EX});setTimeout(()=>{xp.style.height=''},1200);
    [$('tk'),$('gs')].forEach((e,j)=>{e.style.opacity=0;M.animate(e,{opacity:[0,1],transform:['translateY(18px)','translateY(0px)']},{delay:.18+j*.14,duration:.95,ease:EX})})}
-  catch(x){xp.style.height='';[$('tk'),$('gs')].forEach(e=>e.style.opacity='')}}}
-function tick(){const e=$('tm');if(!e)return;const T=S.timer,s=T&&T.s?Math.floor((Date.now()-T.s)/1000):0;e.textContent=pad(Math.floor(s/60))+':'+pad(s%60);
+  catch(x){xp.style.height='';[$('tk'),$('gs')].forEach(e=>e.style.opacity='')}
+  walkOpen()}}
+function tick(){walkTick();const e=$('tm');if(!e)return;const T=S.timer,s=T&&T.s?Math.floor((Date.now()-T.s)/1000):0;e.textContent=pad(Math.floor(s/60))+':'+pad(s%60);
  const g=$('tk'),z=$('gs');
  if(g&&T){const km=(T.d||0)/1000,av=s>15&&km>0?km/(s/3600):0;g.innerHTML='<span class="big">📍 '+km.toFixed(2)+' km</span><div class="sm">⚡ '+av.toFixed(1)+' km/h média'+(G.cs>0?' · '+G.cs.toFixed(1)+' km/h agora':'')+'</div>'}
  if(z)z.textContent=gst()}
-function sc(key,v){if(key==='goal'&&!(+v>0))return toast('Meta inválida');
- if(/^r\d$/.test(key))S.cfg.r[+key[1]]=v;else S.cfg[key]=key==='name'?v.trim().slice(0,24):(v===''?'':+v);
+function sc(key,v){if((key==='goal'||key==='wg'||key==='wi')&&!(+v>0))return toast('Valor inválido');
+ if(/^r\d$/.test(key))S.cfg.r[+key[1]]=v;else S.cfg[key]=(key==='name'||key==='ws'||key==='we')?v.trim().slice(0,24):(v===''?'':+v);
  const r=S.days[today()];if(key==='goal'&&r&&!hit(r))r.g=S.cfg.goal;save();toast('Salvo ✔️')}
 async function tn(){S.cfg.n=!S.cfg.n;try{if(S.cfg.n&&'Notification' in window&&Notification.permission==='default')await Notification.requestPermission()}catch(e){}save();render()}
-function chk(){if(!S.cfg.n)return;const n=new Date(),m=n.getHours()*60+n.getMinutes(),c=calc(),r=S.days[today()];if(hit(r))return;
+function chk(){chkW();if(!S.cfg.n)return;const n=new Date(),m=n.getHours()*60+n.getMinutes(),c=calc(),r=S.days[today()];if(hit(r))return;
  const left=Math.max(S.cfg.goal-(r?r.min:0),0);
  [...S.cfg.r.map(t=>[t,'Faltam '+left+' min para a meta de hoje. Bora! 💪']),['20:30',c.st?'Sua ofensiva de '+c.st+' dia(s) está em risco! 🔥':'Ainda dá tempo de bater a meta de hoje!']].forEach(([t,msg])=>{
   const [h,i]=String(t).split(':'),T=Number(h)*60+Number(i),key=today()+t;if(m>=T&&m<T+20&&S.fl!==key){S.fl=key;save();notify('Passo a Passo',msg)}})}
@@ -211,7 +243,7 @@ async function ex(){const t=JSON.stringify(S),f='passoapasso-'+today()+'.json';
  const b=$('bk');b.value=t;b.select();try{document.execCommand('copy');toast('Backup copiado! Cole em uma nota ou mensagem')}catch(e){toast('Copie o texto abaixo')}}
 function imp(t){try{const o=JSON.parse(t);if(!o||!o.days)throw 0;
  for(const d in o.days){const a=S.days[d],b=o.days[d];if(!a||b.min>a.min)S.days[d]=b}
- Object.assign(S.weights,o.weights||{});S.cfg=Object.assign(S.cfg,o.cfg||{});save();render();toast('Backup importado ✅')}catch(e){toast('Backup inválido ⚠️')}}
+ Object.assign(S.weights,o.weights||{});S.water=S.water||{};for(const d in (o.water||{}))S.water[d]=Math.max(S.water[d]||0,o.water[d]);S.cfg=Object.assign(S.cfg,o.cfg||{});save();render();toast('Backup importado ✅')}catch(e){toast('Backup inválido ⚠️')}}
 async function fi(el){try{imp(await el.files[0].text())}catch(e){toast('Não consegui ler o arquivo')}}
 
 let wid=null,lp=null,wl=null,G={st:'',n:0,t:0,acc:0,cs:0};
@@ -239,8 +271,8 @@ function gpsOn(){if(!S.cfg.gps||wid!==null)return;
 function gpsOff(){if(wid!==null){try{navigator.geolocation.clearWatch(wid)}catch(e){}wid=null}try{wl&&wl.release();wl=null}catch(e){}}
 function tgt(){if(!navigator.geolocation)return toast('Este navegador não tem GPS.');toast('Buscando sinal de GPS…');
  navigator.geolocation.getCurrentPosition(p=>toast('✅ GPS funcionando (precisão ±'+Math.round(p.coords.accuracy)+' m)'),e=>toast(e.code===1?'🚫 Permissão negada. Toque no cadeado 🔒 do Chrome → Permissões → Localização → Permitir.':'⚠️ Sem sinal de GPS agora. Vá para um local aberto e tente de novo.'),{enableHighAccuracy:true,timeout:30000,maximumAge:0})}
-function wkc(L,fn,fmt,gl,H,cw,lb){H=H||84;const vs=L.map(x=>fn(x[1])),mx=Math.max(gl||0,...vs,1);
- return`<div class="wk" style="height:${H+44}px${cw?';min-width:max-content':''}">${gl?`<u style="bottom:${18+gl/mx*H}px"></u>`:''}${L.map(([d,r],i)=>{const v=vs[i],g=r&&r.g||S.cfg.goal,c=!r||!r.min?'':r.min>g?'b2':r.min>=g?'b1':'b0';
+function wkc(L,fn,fmt,gl,H,cw,lb,cf){H=H||84;const vs=L.map(x=>fn(x[1])),mx=Math.max(gl||0,...vs,1);
+ return`<div class="wk" style="height:${H+44}px${cw?';min-width:max-content':''}">${gl?`<u style="bottom:${18+gl/mx*H}px"></u>`:''}${L.map(([d,r],i)=>{const v=vs[i],g=r&&r.g||S.cfg.goal,c=cf?cf(d,r,v):(!r||!r.min?'':r.min>g?'b2':r.min>=g?'b1':'b0');
  return`<div class="${c}"${cw?' style="flex:0 0 '+cw+'px"':''} data-k="${k(d)}" onclick="pick(this.dataset.k)"><small>${v?fmt(v):''}</small><i style="height:${v/mx*H}px"></i>${lb?d.getDate()+'/'+(d.getMonth()+1):d.toLocaleDateString('pt-BR',{weekday:'narrow'})}</div>`}).join('')}</div>`}
 function dk(L){const ds=Object.keys(S.days),km=d=>S.days[d].km||0,tot=ds.reduce((a,d)=>a+km(d),0),pm=today().slice(0,7),mo=ds.filter(d=>d.startsWith(pm)).reduce((a,d)=>a+km(d),0),
  wk=L.reduce((a,x)=>a+(x[1]&&x[1].km||0),0),w=ds.filter(d=>km(d)>0),best=Math.max(0,...ds.map(km)),mn=w.reduce((a,d)=>a+(S.days[d].kmin||S.days[d].min),0),avg=mn>0?tot/(mn/60):0,top=Math.max(0,...w.map(d=>spd(S.days[d])));
@@ -253,8 +285,8 @@ function unpick(){const e=$('dc');e.classList.remove('on');e.dataset.k='';hl('')
 function pick(key){const e=$('dc');if(e.dataset.k===key&&e.classList.contains('on'))return unpick();
  const r=S.days[key],m=r?r.min:0,km=r&&r.km||0,sp=spd(r),g=r&&r.g||S.cfg.goal,d=new Date(key+'T12:00:00'),was=e.classList.contains('on');e.dataset.k=key;
  const st=!m?'Sem registro neste dia':m>g?'🔥 '+(m-g)+' min além da meta':m>=g?'✅ Meta batida':'🎯 Faltaram '+(g-m)+' min para a meta';
- e.innerHTML=`<div><div class="row" style="align-items:center;flex-wrap:nowrap"><h2 class="cap" style="margin:0;flex:1">${d.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'short'})}</h2><button class="g" style="flex:0 0 44px;padding:0" onclick="unpick()">✕</button></div><div class="row c" style="margin-top:8px"><div><div class="big">⏱️ <span data-cu="${m}" data-t="m" data-k="dc0">${m>=60?Math.floor(m/60)+'h'+pad(m%60):m+' min'}</span></div><div class="sm mu">tempo</div></div><div><div class="big">📍 <span data-cu="${km}" data-d="2" data-k="dc1">${km.toFixed(2)}</span></div><div class="sm mu">km</div></div><div><div class="big">⚡ <span data-cu="${sp}" data-d="1" data-k="dc2">${sp.toFixed(1)}</span></div><div class="sm mu">km/h média</div></div></div><div class="sm c" style="margin-top:6px">${st}</div></div>`;
- e.classList.add('on');e.classList.toggle('win',m>0&&m>=g);[...e.querySelectorAll('.row.c>div'),e.querySelector('div.sm.c')].forEach((c,j)=>{if(!c)return;const t0=.12+j*.24;try{if(M.animate&&!RM()){c.style.opacity=0;M.animate(c,{opacity:[0,1],transform:['translateY(18px)','translateY(0px)']},{delay:t0,duration:.85,ease:EX})}}catch(x){c.style.opacity=''}const x=c.querySelector('[data-cu]');if(x)cnt(x,t0+.15,0,1)});hl(key);clearTimeout(bt);bt=setTimeout(unpick,8000)}
+ e.innerHTML=`<div><div class="row" style="align-items:center;flex-wrap:nowrap"><h2 class="cap" style="margin:0;flex:1">${d.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'short'})}</h2><button class="g" style="flex:0 0 44px;padding:0" onclick="unpick()">✕</button></div><div class="row c" style="margin-top:8px"><div><div class="big">⏱️ <span data-cu="${m}" data-t="m" data-k="dc0">${m>=60?Math.floor(m/60)+'h'+pad(m%60):m+' min'}</span></div><div class="sm mu">tempo</div></div><div><div class="big">📍 <span data-cu="${km}" data-d="2" data-k="dc1">${km.toFixed(2)}</span></div><div class="sm mu">km</div></div><div><div class="big">⚡ <span data-cu="${sp}" data-d="1" data-k="dc2">${sp.toFixed(1)}</span></div><div class="sm mu">km/h média</div></div></div><div class="sm c" style="margin-top:6px">${st}</div><div class="sm mu c" style="margin-top:3px">💧 ${(wml(key)/1000).toFixed(2)} L de ${+S.cfg.wg||2} L</div></div>`;
+ e.classList.add('on');e.classList.toggle('win',m>0&&m>=g);[...e.querySelectorAll('.row.c>div'),...e.querySelectorAll('div.sm.c')].forEach((c,j)=>{if(!c)return;const t0=.12+j*.24;try{if(M.animate&&!RM()){c.style.opacity=0;M.animate(c,{opacity:[0,1],transform:['translateY(18px)','translateY(0px)']},{delay:t0,duration:.85,ease:EX})}}catch(x){c.style.opacity=''}const x=c.querySelector('[data-cu]');if(x)cnt(x,t0+.15,0,1)});hl(key);clearTimeout(bt);bt=setTimeout(unpick,8000)}
 const TH=[['auto','Automático','#cfe8d8','#0a110d'],['light','Claro','#bfe8cf','#cfe0ff'],['dark','Escuro','#123a27','#10263d'],['ocean','Oceano','#0b4a73','#0e6a7a'],['sunset','Pôr do sol','#ffcfb0','#ffbfd8'],['forest','Floresta','#14532d','#134e4a'],['grape','Uva','#4c1d95','#1e3a8a']],
 ap=()=>{const t=S.cfg.theme||'auto',r=document.documentElement;if(t==='auto')r.removeAttribute('data-theme');else r.dataset.theme=t},
 sth=t=>{S.cfg.theme=t;save();render();toast('Tema aplicado 🎨')};
@@ -320,16 +352,75 @@ function gm(m,g,c){const n=esc(S.cfg.name||''),h=new Date().getHours(),hi=h<12?'
  else{t=hi+cm+'.';x=['Que tal começar agora os seus '+g+' minutos de caminhada? O primeiro passo é o mais importante.','Hoje é dia de somar passos'+cm+'. '+g+' minutinhos já deixam o dia melhor.','Calce o tênis'+cm+' e comece sua meta de '+g+' minutos'+(c.st?'. Sua ofensiva de '+c.st+' dia(s) conta com você.':'.')][v]}
  return'<div class="gr"><div class="gt">'+t+'</div><p class="gx">'+x+'</p>'+(S.cfg.name?'':'<div class="row" style="margin-top:12px"><input id="nm" type="text" maxlength="24" placeholder="Como posso te chamar?"><button onclick="sn()">Salvar nome</button></div>')+'</div>'}
 let tgb=0;
-function tmr(f){const run=S.timer&&S.timer.s;return(run?'<i class="bbm'+(f?'':' on')+'"></i>':'')+'<h2>⏱️ Cronômetro da caminhada</h2><div class="big c" id="tm">00:00</div>'+(run&&S.cfg.gps?'<div class="xp" id="xp"><div class="c" id="tk"></div><div class="sm mu c" id="gs"></div></div>':'')+'<button style="width:100%" onclick="tg()">'+(run?'⏹ Finalizar e salvar':'▶ Iniciar caminhada')+'</button>'}
+function tmr(f){const run=S.timer&&S.timer.s;return(run?'<i class="bbm'+(f?'':' on')+'"></i>':'')+'<h2>⏱️ Cronômetro da caminhada</h2><div class="big c" id="tm">00:00</div>'+(run&&S.cfg.gps?'<div class="xp" id="xp"><div class="c" id="tk"></div><div class="sm mu c" id="gs"></div></div>':'')+'<button id="tbtn"'+(run?' class="pb"':'')+' style="width:100%" onclick="tg()">'+(run?'⏹ Finalizar e salvar':'▶ Iniciar caminhada')+'</button>'+(run?'<button class="g" style="width:100%;margin-top:8px" onclick="walkOpen()">Abrir tela da caminhada</button>':'')}
 const LEG='<div class="sm mu" style="margin-top:6px"><span class="lg b0"></span>abaixo da meta<span class="lg b1"></span>meta batida<span class="lg b2"></span>além da meta · linha tracejada = meta</div>';
 function allDays(){const ks=Object.keys(S.days).sort(),L=[];if(ks.length)for(const d=new Date(ks[0]+'T12:00:00'),e=today();k(d)<=e;d.setDate(d.getDate()+1))L.push([new Date(d),S.days[k(d)]]);return L}
 function ovo(){const e=$('ov'),c=$('ovc'),L=allDays(),n=L.length,hh=L.filter(x=>hit(x[1])).length,f=x=>x[0].toLocaleDateString('pt-BR',{day:'numeric',month:'short'});
  c.innerHTML='<div class="row" style="align-items:center;flex-wrap:nowrap"><h2 style="margin:0;flex:1">Todo o período</h2><button class="g" style="flex:0 0 44px;padding:0" onclick="ovx()">✕</button></div>'+(n?'<div class="sm mu" style="margin:4px 0 10px">'+f(L[0])+' – '+f(L[n-1])+' · '+n+' dias · '+hh+' com meta batida</div><div class="sc" id="osc">'+wkc(L,r=>r?r.min:0,v=>v,S.cfg.goal,150,38,1)+'</div>'+LEG:'<p class="mu" style="margin:8px 0 0">Ainda não há registros.</p>');
  document.body.style.overflow='hidden';e.classList.add('on');const sc=$('osc');if(sc)sc.scrollLeft=sc.scrollWidth;
- if(M.animate&&!RM()){M.animate(c,{opacity:[0,1],transform:['scale(.9) translateY(30px)','scale(1) translateY(0px)']},{duration:.85,ease:[.34,1.45,.64,1]});
+ if(M.animate&&!RM()){M.animate(c,{opacity:[0,1],transform:['scale(.9) translateY(30px)','scale(1) translateY(0px)']},{duration:.85,ease:EX});
   [...c.querySelectorAll('.wk i')].forEach((b,i)=>M.animate(b,{transform:['scaleY(0)','scaleY(1)']},{delay:.3+Math.min(i*.012,.8),duration:.9,ease:EX}))}}
 function ovx(){const e=$('ov');if(!e.classList.contains('on'))return;unpick();document.body.style.overflow='';e.classList.remove('on');if(M.animate&&!RM())M.animate($('ovc'),{opacity:[1,0],transform:['scale(1) translateY(0px)','scale(.94) translateY(20px)']},{duration:.3,ease:'easeIn'})}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')ovx()});
+if(/Android/i.test(navigator.userAgent))document.documentElement.classList.add('and');
+const wml=d=>S.water[d]||0,LEGW='<span class="lg w0"></span>abaixo da meta<span class="lg w1"></span>meta batida<span class="lg w2"></span>além da meta · linha tracejada = meta';
+function wadd(ml){const d=sel,g=(+S.cfg.wg||2)*1000,was=wml(d)>=g;S.water[d]=Math.max(0,wml(d)+ml);if(!S.water[d])delete S.water[d];save();render();
+ if(ml>0&&!was&&wml(d)>=g)notify('💧 Meta de água batida!','Você chegou a '+(+S.cfg.wg||2)+' L. Continue se hidratando.',true);else if(ml>0)toast('+'+ml+' ml 💧')}
+function wcard(){const m=wml(sel)/1000,g=+S.cfg.wg||2,p=Math.min(m/g,1);
+ return'<div class="cd'+(m>=g?' wwin':'')+'"><h2>💧 Hidratação</h2><div class="row" style="align-items:flex-end;flex-wrap:nowrap"><div style="flex:2"><span class="big" data-cu="'+m+'" data-d="2" data-k="whid">'+m.toFixed(2)+'</span> <span class="mu">L de '+g+' L</span></div><div class="mu" style="flex:1;text-align:right">'+Math.round(m/g*100)+'%</div></div><div class="bar wt" style="margin:10px 0 12px"><i style="width:'+p*100+'%"></i></div><div class="row">'+[200,300,500].map(x=>'<button class="g" onclick="wadd('+x+')">+'+x+' ml</button>').join('')+'<button class="g" onclick="wadd(-200)">−200</button></div></div>'}
+function wdk(L){const g=+S.cfg.wg||2,ds=Object.keys(S.water),tot=ds.reduce((a,d)=>a+S.water[d],0)/1000,avg=ds.length?tot/ds.length:0,hits=ds.filter(d=>S.water[d]/1000>=g).length,W=L.map(x=>[x[0],S.water[k(x[0])]||0]);
+ return'<div class="cd"><h2>💧 Hidratação</h2><div class="row c"><div><div class="big" data-cu="'+tot+'" data-d="1" data-k="wtot">'+tot.toFixed(1)+'</div><div class="sm mu">litros no total</div></div><div><div class="big" data-cu="'+avg+'" data-d="2" data-k="wavg">'+avg.toFixed(2)+'</div><div class="sm mu">L por dia (média)</div></div><div><div class="big" data-cu="'+hits+'" data-k="whit">'+hits+'</div><div class="sm mu">dias com meta</div></div></div><div style="margin-top:12px">'+wkc(W,x=>x/1000,v=>v.toFixed(1),g,84,0,0,(d,r,v)=>!r?'':v>g?'w2':v>=g?'w1':'w0')+'</div><div class="sm mu" style="margin-top:6px">'+LEGW+'</div></div>'}
+function chkW(){if(!S.cfg.wr)return;const n=new Date(),m=n.getHours()*60+n.getMinutes(),f=t=>{const[h,i]=String(t).split(':');return Number(h)*60+Number(i)};
+ if(m<f(S.cfg.ws||'08:00')||m>f(S.cfg.we||'21:00'))return;const ml=wml(today()),g=(+S.cfg.wg||2)*1000;if(ml>=g)return;
+ if(Date.now()-(S.wlast||0)<(+S.cfg.wi||90)*60000)return;S.wlast=Date.now();save();notify('💧 Hora de beber água','Você já bebeu '+(ml/1000).toFixed(1)+' de '+(+S.cfg.wg||2)+' L hoje.',false,'drop')}
+function twr(){S.cfg.wr=!S.cfg.wr;if(S.cfg.wr){S.wlast=Date.now();try{if('Notification' in window&&Notification.permission==='default')Notification.requestPermission()}catch(e){}}save();render();toast(S.cfg.wr?'Lembretes de água ativados 💧':'Lembretes de água desativados')}
+let AC;const actx=()=>{try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();return AC}catch(e){}};
+document.addEventListener('pointerdown',()=>actx(),{passive:true});
+function tone(f,at,d,type,v,f2){const a=actx();if(!a)return;const o=a.createOscillator(),g=a.createGain(),t=a.currentTime+at;o.type=type||'sine';o.frequency.setValueAtTime(f,t);if(f2)o.frequency.exponentialRampToValueAtTime(f2,t+d*.8);
+ g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(v||.25,t+.012);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(a.destination);o.start(t);o.stop(t+d+.05)}
+const SND={beep:()=>tone(880,0,.2),bell:()=>{tone(1318,0,1.3,'sine',.22);tone(1976,0,.9,'sine',.1);tone(2637,0,.5,'sine',.05)},drop:()=>{tone(1400,0,.22,'sine',.3,420);tone(900,.14,.18,'sine',.12,300)},
+ crystal:()=>[1047,1319,1568].forEach((f,i)=>tone(f,i*.11,.7,'sine',.18)),pulse:()=>{tone(660,0,.12,'triangle',.28);tone(660,.2,.12,'triangle',.28)},chime:()=>{tone(784,0,.55,'sine',.25);tone(587,.3,.8,'sine',.25)},
+ win:()=>[523,659,784,1047].forEach((f,i)=>tone(f,i*.1,.55,'triangle',.2))},
+VIB={short:[120],double:[110,70,110],long:[450],rhythm:[90,60,90,60,260]},
+SNDS=[['beep','🔊 Padrão'],['bell','🔔 Sino'],['drop','💧 Gota'],['crystal','💎 Cristal'],['pulse','💓 Pulso'],['chime','🛎️ Dong'],['none','🔇 Mudo']],
+VIBS=[['off','Desligada'],['short','Curta'],['double','Dupla'],['long','Longa'],['rhythm','Ritmo']];
+function ding(w,k){const id=S.cfg.snd||'beep';if(id!=='none')try{(w?SND.win:SND[k||id]||SND.beep)()}catch(e){}const v=S.cfg.vib||'double';if(v!=='off')try{navigator.vibrate&&navigator.vibrate(w?[120,60,120,60,300]:VIB[v]||VIB.double)}catch(e){}}
+function ssnd(id){S.cfg.snd=id;save();render();if(id==='none')toast('Som desativado');else try{SND[id]()}catch(e){}}
+function svib(id){S.cfg.vib=id;save();render();if(id==='off')return toast('Vibração desativada');if(!navigator.vibrate)return toast('Este aparelho não suporta vibração');navigator.vibrate(VIB[id])}
+const WALK='<div class="wcol"><div class="wit row" style="align-items:center;flex-wrap:nowrap"><button class="g" style="flex:0 0 auto" onclick="walkClose()">⌄ Minimizar</button><div class="sm mu" style="flex:1;text-align:right">Caminhada em andamento</div></div>'+
+'<div class="wit cd wp c"><i class="bbm on"></i><div class="sm mu">tempo</div><div class="wtm" id="wtm">00:00</div><div class="wn"><span id="wd">0.00</span><small> km</small></div><div class="sm mu">distância percorrida</div></div>'+
+'<div class="wit row" style="gap:12px"><div class="cd c"><div class="wn2" id="wsp">0.0</div><div class="sm mu">km/h agora</div></div><div class="cd c"><div class="wn2" id="wav">0.0</div><div class="sm mu">km/h média</div></div></div>'+
+'<div class="wit cd"><div class="row" style="align-items:baseline;flex-wrap:nowrap"><h2 style="margin:0;flex:1">Velocidade ao longo do tempo</h2><div class="sm mu" style="flex:0 0 auto" id="wpkv"></div></div>'+
+'<svg id="wsv" class="wsv" viewBox="0 0 320 150" width="100%" style="display:block;margin-top:8px;overflow:visible"><defs><linearGradient id="wga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--pr);stop-opacity:.34"/><stop offset="1" style="stop-color:var(--pr);stop-opacity:0"/></linearGradient><linearGradient id="wgl" gradientUnits="userSpaceOnUse" x1="0" y1="18" x2="0" y2="132"><stop offset="0" style="stop-color:var(--or)"/><stop offset="1" style="stop-color:var(--pr)"/></linearGradient></defs>'+
+'<line class="gx2" x1="6" x2="314" y1="132" y2="132"/><line class="gx2" x1="6" x2="314" y1="75" y2="75"/><line class="gx2" x1="6" x2="314" y1="18" y2="18"/><text id="wt2" x="8" y="14"></text><text id="wt1" x="8" y="71"></text>'+
+'<line id="wvl" class="wvl" x1="6" x2="314" y1="132" y2="132"/><text id="wvt" x="314" text-anchor="end" y="128"></text><path id="warea" fill="url(#wga)"/><path id="wpath" class="wlp" stroke="url(#wgl)"/><g id="wpts"></g>'+
+'<g id="wpk"><circle r="9" class="wh2"/><circle r="5" class="wpc"/><text id="wpkt" y="-12" text-anchor="middle"></text></g><g id="whd"><circle r="5" class="hh"/><circle r="3.6" class="hd"/></g><text id="wnd" x="160" y="80" text-anchor="middle">O gráfico aparece quando o GPS medir a velocidade</text></svg>'+
+'<div class="sm mu" style="margin-top:6px"><span class="ldot"></span>pontos de maior intensidade<span class="ldot pk"></span>pico de velocidade</div></div>'+
+'<div class="wit sm mu c" id="wgp" style="min-height:2.7em"></div><button id="wbtn" class="pb wit" style="width:100%;margin-top:auto" onclick="tg()">⏹ Finalizar e salvar</button></div>';
+function walkOpen(){const w=$('walk');if(!S.timer||!S.timer.s)return;w.innerHTML=WALK;w.classList.add('on');document.body.style.overflow='hidden';walkUI(Math.floor((Date.now()-S.timer.s)/1000));walkTick();
+ if(M.animate&&!RM())[...w.querySelectorAll('.wit')].forEach((e,j)=>{e.style.opacity=0;M.animate(e,{opacity:[0,1],transform:['translateY(26px)','translateY(0px)']},{delay:.12+j*.1,duration:.95,ease:EX})})}
+function walkClose(){const w=$('walk');if(!w.classList.contains('on'))return;w.classList.remove('on');if(!$('ov').classList.contains('on'))document.body.style.overflow=''}
+function walkTick(){const T=S.timer;if(!T||!T.s)return;const s=Math.floor((Date.now()-T.s)/1000);
+ if(S.cfg.gps){T.h=T.h||[];const l=T.h.length?T.h[T.h.length-1][0]:-9;if(s-l>=2){const cs=Date.now()-G.t<8000?(G.cs||0):0;T.h.push([s,+cs.toFixed(2)]);if(T.h.length%10===0)save();if(T.h.length>2400)T.h=T.h.filter((_,i)=>i%2===0)}}
+ const dn=((S.days[today()]||{}).min||0)+s/60,pg=Math.min(dn/S.cfg.goal,1);
+ [$('tbtn'),$('wbtn')].forEach(pb=>{if(pb){pb.style.setProperty('--p',(pg*100).toFixed(2)+'%');pb.classList.toggle('full',pg>=1);pb.classList.toggle('over',dn>S.cfg.goal)}});
+ if($('walk').classList.contains('on'))walkUI(s)}
+function walkUI(s){const T=S.timer;if(!T||!$('wtm'))return;const km=(T.d||0)/1000,hh=Math.floor(s/3600),mm=Math.floor(s%3600/60),av=s>15&&km>0?km/(s/3600):0,cs=Date.now()-G.t<8000?(G.cs||0):0;
+ $('wtm').textContent=(hh?hh+':':'')+pad(mm)+':'+pad(s%60);$('wd').textContent=km.toFixed(2);$('wsp').textContent=cs.toFixed(1);$('wav').textContent=av.toFixed(1);
+ $('wgp').textContent=S.cfg.gps?gst():'GPS desligado. Ative em Ajustes para medir distância e velocidade.';wchart(T.h||[])}
+function wchart(h){const W=320,H=150,L=6,R=6,P=18,B=18,e=i=>$(i),n=h.length;
+ if(n<2){e('wpath').setAttribute('d','');e('warea').setAttribute('d','');e('wpts').innerHTML='';e('wpk').style.display='none';e('whd').style.display='none';e('wnd').style.display='';e('wpkv').textContent='';return}
+ e('wnd').style.display='none';e('wpk').style.display='';e('whd').style.display='';
+ const sm=h.map((p,i)=>{let a=0,c=0;for(let j=Math.max(0,i-2);j<=Math.min(n-1,i+2);j++){a+=h[j][1];c++}return a/c}),ts=h.map(p=>p[0]),pk=Math.max(...sm),mx=Math.max(6,pk)*1.18,t1=Math.max(ts[n-1],30),
+ X=t=>L+t/t1*(W-L-R),Y=v=>H-B-v/mx*(H-P-B),avg=sm.reduce((a,b)=>a+b,0)/n,pi=sm.indexOf(pk),pts=sm.map((v,i)=>X(ts[i]).toFixed(1)+' '+Y(v).toFixed(1)),d='M'+pts.join('L'),hi=[];
+ e('wpath').setAttribute('d',d);e('warea').setAttribute('d',d+'L'+X(ts[n-1]).toFixed(1)+' '+(H-B)+'L'+X(ts[0]).toFixed(1)+' '+(H-B)+'Z');
+ for(let i=2;i<n-2;i++)if(i!==pi&&sm[i]>=sm[i-1]&&sm[i]>=sm[i+1]&&sm[i]>=pk*.85&&sm[i]>=avg*1.15&&(!hi.length||i-hi[hi.length-1]>=8))hi.push(i);
+ e('wpts').innerHTML=hi.map(i=>{const x=X(ts[i]).toFixed(1),y=Y(sm[i]).toFixed(1);return'<circle cx="'+x+'" cy="'+y+'" r="9" class="wh2"/><circle cx="'+x+'" cy="'+y+'" r="3.6" class="wh1"/>'}).join('');
+ const px=X(ts[pi]),py=Y(pk),an=px>W-60?'end':px<50?'start':'middle',tx=e('wpkt');e('wpk').setAttribute('transform','translate('+px.toFixed(1)+' '+py.toFixed(1)+')');
+ tx.textContent=pk.toFixed(1)+' km/h';tx.setAttribute('text-anchor',an);tx.setAttribute('x',an==='end'?8:an==='start'?-8:0);
+ const ly=Y(avg);e('wvl').setAttribute('y1',ly.toFixed(1));e('wvl').setAttribute('y2',ly.toFixed(1));e('wvt').setAttribute('y',(ly-3).toFixed(1));e('wvt').textContent='média '+avg.toFixed(1);
+ e('whd').setAttribute('transform','translate('+X(ts[n-1]).toFixed(1)+' '+Y(sm[n-1]).toFixed(1)+')');
+ e('wt2').textContent=mx.toFixed(0)+' km/h';e('wt1').textContent=(mx/2).toFixed(0);e('wpkv').textContent='pico '+pk.toFixed(1)+' km/h'}
 function cal(){const b=new Date();b.setDate(1);b.setMonth(b.getMonth()+vm);const y=b.getFullYear(),mo=b.getMonth(),n=new Date(y,mo+1,0).getDate();
  let h='<div class="cal">'+[...'DSTQQSS'].map(x=>`<b>${x}</b>`).join('')+'<i></i>'.repeat(b.getDay()),hits=0;
  for(let d=1;d<=n;d++){const key=y+'-'+pad(mo+1)+'-'+pad(d),r=S.days[key],ok=hit(r);if(ok)hits++;
@@ -350,6 +441,7 @@ ${isT?'':'<button class="g" style="margin-top:8px" onclick="go(today())">Voltar 
 <div class="cd"><h2>➕ Registrar ${isT?'hoje':'neste dia'}</h2><div class="row">${[5,10,15,30].map(x=>`<button class="g" onclick="add(${x})">+${x}</button>`).join('')}</div>
 <div class="row" style="margin-top:8px"><input id="cm" type="number" inputmode="numeric" placeholder="minutos"><input id="ck" type="number" inputmode="decimal" placeholder="km (opcional)"></div>
 <button style="width:100%;margin-top:8px" onclick="ad()">Adicionar</button>${d?'<button class="g" style="width:100%;margin-top:8px" onclick="ask(\'z\',zr,this)">Zerar este dia</button>':''}</div>
+${wcard()}
 <div class="cd"><h2>⚖️ Peso</h2><div class="row"><input id="wi" type="number" inputmode="decimal" step="0.1" placeholder="kg" value="${S.weights[sel]||''}"><button onclick="pw()">Salvar peso</button></div></div>`}
 
 function T1(){const c=calc(),w=ws(),[ch,hits]=cal(),mg=S.cfg.mg||20,b=new Date();b.setDate(1);b.setMonth(b.getMonth()+vm);const into=c.pts%300;
@@ -364,7 +456,7 @@ function T2(){const c=calc(),w=ws(),g=S.cfg.goal,tw=+S.cfg.tw,h=+S.cfg.h,
  imc=h&&w.cur?w.cur/((h/100)**2):0,pct=tw&&w.sw>tw?Math.min(w.lost/(w.sw-tw),1)*100:-1;
  return`<div class="cd"><div class="row c"><div><div class="big" data-cu="${c.tot}" data-t="t" data-k="tot2">${Math.floor(c.tot/60)}h${pad(c.tot%60)}</div><div class="sm mu">tempo total</div></div><div><div class="big" data-cu="${Object.keys(S.days).length}" data-k="days2">${Object.keys(S.days).length}</div><div class="sm mu">dias</div></div><div><div class="big" data-cu="${c.km}" data-d="1" data-k="km2">${c.km.toFixed(1)}</div><div class="sm mu">km</div></div></div></div>
 <div class="cd"><div class="row" style="align-items:center;flex-wrap:nowrap;margin-bottom:8px"><h2 style="margin:0;flex:1">Histórico</h2><div class="seg" style="flex:0 0 auto"><button class="g on">7 dias</button><button class="g" onclick="ovo()">Todo período</button></div></div>${wkc(L,r=>r?r.min:0,v=>v,g)}<div class="sm mu" style="margin-top:6px"><span class="lg b0"></span>abaixo da meta<span class="lg b1"></span>meta batida<span class="lg b2"></span>além da meta · linha tracejada = meta</div></div>
-${dk(L)}
+${dk(L)}${wdk(L)}
 <div class="cd"><h2>🎯 Progressão da meta</h2>${h7>=6&&g<90?`<p>Você bateu a meta em ${h7} dos últimos 7 dias. Pronto para o próximo nível?</p><button onclick="up()">Subir para ${g+5} min/dia</button>`:`<p class="mu" style="margin:0">Meta atual: ${g} min/dia. Bata a meta em 6 de 7 dias (você está em ${h7}) para liberar +5 min.</p>`}</div>
 <div class="cd"><h2>⚖️ Peso</h2>${w.cur?`<div class="sm">${w.lost>0?'Já perdeu <b>'+w.lost+' kg</b>':'Registre seu peso para acompanhar'}${pct>=0?' · '+Math.round(pct)+'% da meta':''}</div>`:'<p class="mu sm">Registre seu peso na aba Hoje.</p>'}${pct>=0?`<div class="bar" style="margin:6px 0"><i style="width:${pct}%"></i></div>`:''}${wch(w.a,tw)}${imc?`<div class="sm mu">IMC ${imc.toFixed(1)} · ${imc<18.5?'abaixo do peso':imc<25?'normal':imc<30?'sobrepeso':'obesidade'}</div>`:''}</div>`}
 
@@ -372,8 +464,10 @@ function T3(){return`<div class="cd"><h2>👤 Seu nome</h2><p class="sm mu" styl
 <div class="cd"><h2>🎨 Tema</h2><div class="ths">${TH.map(t=>`<button class="th${(S.cfg.theme||'auto')===t[0]?' on':''}" onclick="sth('${t[0]}')"><i style="background:linear-gradient(135deg,${t[2]} 50%,${t[3]} 50%)"></i>${t[1]}</button>`).join('')}</div></div>
 <div class="cd"><h2>🎯 Metas</h2>${F('Meta diária (minutos)','goal')}${F('Desafio do mês (dias com meta batida)','mg')}${F('Peso inicial (kg)','sw')}${F('Peso desejado (kg)','tw')}${F('Altura (cm)','h')}</div>
 <div class="cd"><h2>📍 Distância (GPS)</h2><p class="sm mu" style="margin:0 0 8px">Ao iniciar o cronômetro, o app mede os km pelo GPS do celular e soma ao dia quando você finaliza. Mantenha o app aberto e a tela ligada: com a tela apagada ou o app em segundo plano o Android pausa o GPS (o app tenta manter a tela acesa sozinho). Sua localização não sai do aparelho. Sem sinal ou dentro de casa, informe os km manualmente.</p><button class="g" style="width:100%" onclick="tgps()">${S.cfg.gps?'📡 GPS ligado (toque para desligar)':'📡 GPS desligado (toque para ligar)'}</button><button class="g" style="width:100%;margin-top:8px" onclick="tgt()">🧪 Testar GPS agora</button></div>
+<div class="cd"><h2>💧 Hidratação</h2>${F('Meta diária (litros)','wg')}${F('Intervalo entre lembretes (minutos)','wi')}${F('Início dos lembretes','ws','time')}${F('Fim dos lembretes','we','time')}<div class="row" style="margin-top:10px"><button onclick="twr()">${S.cfg.wr?'🔕 Desativar lembretes':'💧 Ativar lembretes'}</button><button class="g" onclick="notify('💧 Hora de beber água','Teste: lembrete funcionando')">Testar</button></div><p class="sm mu" style="margin:8px 0 0">Os lembretes aparecem com o app aberto. Ative os avisos abaixo para receber também a notificação do sistema.</p></div>
 <div class="cd"><h2>🔔 Lembretes</h2><p class="sm mu" style="margin:0">Os avisos aparecem com o app aberto (mensagem na tela, vibração, som e notificação do navegador quando permitida). Às 20:30 aviso se sua ofensiva estiver em risco.</p>${F('Lembrete 1','r0','time',S.cfg.r[0])}${F('Lembrete 2','r1','time',S.cfg.r[1])}
 <div class="row" style="margin-top:10px"><button onclick="tn()">${S.cfg.n?'🔕 Desativar avisos':'🔔 Ativar avisos'}</button><button class="g" onclick="notify('Passo a Passo','Teste: avisos funcionando ✅')">Testar</button></div></div>
+<div class="cd"><h2>🔊 Sons e vibração</h2><div class="sm mu" style="margin-bottom:6px">Som dos avisos</div><div class="sn">${SNDS.map(x=>`<button class="g${(S.cfg.snd||'beep')===x[0]?' on':''}" onclick="ssnd('${x[0]}')">${x[1]}</button>`).join('')}</div><div class="sm mu" style="margin:12px 0 6px">Vibração</div><div class="sn">${VIBS.map(x=>`<button class="g${(S.cfg.vib||'double')===x[0]?' on':''}" onclick="svib('${x[0]}')">${x[1]}</button>`).join('')}</div><p class="sm mu" style="margin:8px 0 0">${'vibrate' in navigator?'A vibração funciona neste aparelho (Chrome no Android; o iPhone não suporta). O navegador só libera depois que você tocar na tela.':'Este aparelho ou navegador não suporta vibração.'}</p><button class="g" style="width:100%;margin-top:10px" onclick="notify('Passo a Passo','Teste de som e vibração')">Testar aviso</button></div>
 <div class="cd"><h2>💾 Backup e outros aparelhos</h2><p class="sm mu" style="margin:0 0 8px">Exporte para guardar ou levar seus dados a outro aparelho e importe lá o arquivo. A importação mescla com os dados existentes (mantém o maior tempo de cada dia).</p><button style="width:100%" onclick="ex()">⬇️ Exportar backup</button>
 <label>Importar arquivo de backup (.json)</label><input type="file" accept=".json,application/json" onchange="fi(this)"><label>Ou cole aqui o texto do backup</label><textarea id="bk" rows="3"></textarea><button class="g" style="width:100%;margin-top:8px" onclick="imp($('bk').value)">Importar texto</button></div>
 <div class="cd"><button class="g" style="width:100%" onclick="ask('r',rs,this)">🗑️ Apagar todos os dados</button><p class="sm mu" style="margin:8px 0 0">Dica: no Chrome do Android, menu ⋮ → “Adicionar à tela inicial”.</p></div>`}
